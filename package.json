@@ -1,0 +1,15 @@
+{
+  "name": "hr-management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"npx tailwindcss -i ./assets/css/style.css -o ./assets/css/output.css --watch"
+  },
+  "author": "Iskandar",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
