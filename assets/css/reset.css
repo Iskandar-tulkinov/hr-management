@@ -2,7 +2,7 @@
   Josh's Custom CSS Reset + some modifications
   https://www.joshwcomeau.com/css/custom-css-reset/
 */
-
+@import url(../img/icomoon/style.css);
 html {
   box-sizing: border-box;
 }

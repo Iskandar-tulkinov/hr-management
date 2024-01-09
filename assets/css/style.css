@@ -1,27 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* CUSTOM PROPS */
-:root {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
+* {
+  font-family: 'Inter',"Arial", sans-serif;
+  font-size: 16px;
+  box-sizing: border-box;
 }
-
-:root[data-theme="light"] {
-
-}
-
-:root[data-theme="dark"] {
-
-}
-
-
 /* GLOBAL */
 body {
   display: flex;
   flex-direction: column;
   padding: 0;
   margin: 0;
-  font-family: "Arial", sans-serif;
   font-size: 16px;
   line-height: 1.5;
   background-color: #fff;
@@ -31,7 +23,6 @@ body {
 img {
   height: auto;
 }
-
 
 /* AUTOFILL-STYLES */
 /*input:-webkit-autofill,
@@ -81,13 +72,6 @@ select:-webkit-autofill:focus {
   margin-left: auto;
   margin-right: auto;
 }
-
-
-/* MAIN-CONTENT */
-.main-content {
-  flex-grow: 1;
-}
-
 @media
 only screen and (-webkit-min-device-pixel-ratio: 2),
 only screen and (   min--moz-device-pixel-ratio: 2),
