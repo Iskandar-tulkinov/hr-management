@@ -1,4 +1,9 @@
 "use sctict";
-const totalEmployees= document.querySelector('.total-employees')
+const dashboard = document.querySelector(".dashboard");
+const openDashboard = function (){
+  dashboard.classList.toggle('hidden')
+}
 
-totalEmployees.textContent='0'
+if (window.innerWidth > 768) {
+  dashboard.classList.remove('fixed');
+}

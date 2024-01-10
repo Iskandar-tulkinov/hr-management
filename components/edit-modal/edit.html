@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Data</title>
+  <link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/output.css">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<table>
+  <tbody class="tableBody">
+    <!-- Employee Table -->
+ </tbody>
+</table> <button   data-target="#editModal"
+  class="btn py-3 px-1 w-fit h-fit flex justify-center items-center rounded-md duration-300 transition-all ease-linear hover:bg-yellow-200">
+  <img
+     class="cursor-pointer"
+     src="../../assets/img/edit.svg"
+     alt="edit icon"
+     width="30"
+     height="30" />
+</button>
+
+<div class="all-modals bg-black">
+  <!-- All Modals -->
+</div>
+<!-- \ -->
+<div onclick="closeModal()"
+  id="overlay"
+  class="hidden absolute top-0 left-0 w-full h-full bg-black opacity-50 backdrop-opacity-70">
+  Overlay
+</div>
+<script src="../../js/data.js"></script>
+<script src="../../pages/all-employees/allEmployees.js"></script>
+<script src="../modals-data/modal-content.js"></script>
+<script src="../modals-data/modal-controller.js"></script>
+<script src="./edit.js"></script>
+</body>
+</html>

@@ -8,65 +8,102 @@
       <link rel="stylesheet" href="./assets/css/reset.css" />
       <link rel="stylesheet" href="./assets/css/style.css" />
       <!-- <link rel="stylesheet" href="./assets/css/output.css" /> -->
-      <link rel="stylesheet" href="./assets/css/output.css">
+      <link rel="stylesheet" href="./assets/css/output.css" />
    </head>
    <body class="h-full w-full">
-      <div class=" md:flex ">
+      <div class="flex flex-col md:flex md:flex-row w-full h-full">
          <aside
-         class="float-left border-r border-gray-300 flex h-screen max-w-[20rem] flex-col bg-gray-100 p-4 text-gray-300">
-         <div class="p-4 mb-2">
-           <a class="block  text-2xl text-center antialiased  font-semibold leading-snug tracking-normal py-2 text-gray-900 hover:text-red-800 hover:bg-gray-300 rounded-[15px] duration-250 ease-in transition-all" href="index.html">
-            HR Management
-           </a>
-         </div>
-         <div
-           class="flex min-w-[240px] h-full flex-col justify-between gap-1 p-2 py-8 capitalize text-gray-800 duration-200">
-           <div class="dashboard flex flex-col text-3xl">
-            <a href="../../index.html"
-            class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all rounded-lg outline-none text-start hover:bg-gray-300 hover:bg-opacity-80 hover:text-gray-900  focus:bg-red-800 focus:text-sky-50"
-            id="home" onclick="renderGraphs()">
-            <span class="icon-home text-2xl"></span>
-           Homee
-          </a>
-             <a href="./pages/all-employees/allEmployees.html"
-               class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all rounded-lg outline-none text-start hover:bg-gray-300 hover:bg-opacity-80 hover:text-gray-900  focus:bg-red-800 focus:text-sky-50"
-               id="table" onclick="renderTable(employees)" role="button">
-               <span class="icon-table2 text-2xl"></span>
-               Table
-            </a>
-             <button
-               class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all rounded-lg outline-none text-start hover:bg-gray-300 hover:bg-opacity-80 hover:text-gray-900  focus:bg-red-800 focus:text-sky-50"
-               id="addEmployee" onclick="renderForm()">
-               <span class="icon-user-plus text-2xl"></span>
-               Add Employee
-             </button>
+            class="flex-col md:flex float-left border-r border-gray-300 bg-gray-300 md:h-full md:max-w-[20rem] font-bold text-gray-300">
+            <div class="flex gap-4 items-center md:px-4 py-2 ">
+              <button
+                 onclick="openDashboard()"
+                 class="sidebar-icon md:hidden active:scale-95">
+                 <span
+                    class="icon-list text-center text-2xl text-black font-bold p-3 w-8 h-8 cursor-pointer rounded-lg hover:text-red-500 hover:bg-gray-300 hover:scale-110 duration-250 ease-in transition-all"></span>
+              </button>
+              <a
+                 class="block text-2xl text-center antialiased font-semibold leading-snug tracking-normal py-2 px-3 text-gray-900 hover:text-red-500 hover:bg-gray-300 rounded-lg duration-250 ease-in transition-all"
+                 href="index.html">
+                 HR Management
+              </a>
+           </div>
+            <div
+               class="dashboard fixed left-0   hidden md:flex flex-col  md:justify-between md:rounded-none  md:min-w-[240px] w-full h-fit md:w-full  md:h-full  md:mx-2 md:p-2 md:py-8 capitalize  bg-gray-300 text-gray-800 duration-200">
+               <div class=" flex flex-col text-3xl px-2 ">
+                  <a
+                     href="../../index.html"
+                     class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all  duration-300 ease-linear rounded-lg outline-none text-start bg-red-800 text-white hover:text-white hover:bg-red-600 "
+                     id="home"
+                     onclick="renderGraphs()">
+                     <span class="icon-home text-2xl"></span>
+                     Home
+                  </a>
+                  <a
+                     href="./pages/all-employees/allEmployees.html"
+                     class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all  duration-300 ease-linear rounded-lg outline-none text-start hover:text-white hover:bg-red-600 "
+                     id="table"
+                     role="button">
+                     <span class="icon-table2 text-2xl"></span>
+                     Table
+                  </a>
+                  <button
+                  data-target="#addEmployeeModal"
+                  class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start  hover:text-white hover:bg-red-600  focus:text-black"
+                  id="addEmployee"
+                  onclick="renderForm()">
+                  <span class="icon-user-plus text-2xl"></span>
+                  Add Employee
+               </button>
+               </div>
+               <button
+               data-target="#logoutModal"
+               class=" flex items-center justify-start text-xl w-full ml-2 p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start hover:text-white hover:bg-red-600 focus:bg-red-800 focus:text-white active:text-white">
+               <span class="icon-log-out text-2xl "></span>
+               Log Out
+            </button>
+            </div>
+         </aside>
 
-           </div>
-           <button
-             class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all rounded-lg outline-none text-start hover:bg-gray-300 hover:text-gray-900 active:bg-slate-950 active:text-sky-50">
-             <span class="icon-log-out text-2xl"></span>
-             Log Out
-           </button>
-         </div>
-       </aside>
-
-         <main class=" flex flex-wrap gap-4 h-fit mx-6 mt-4">
-           <div class="border-[2px] border-gray-700 p-4 rounded-[10px] h-[150px] w-[240px] flex flex-col items-center gap-2">
-            <h2 class="text-red-800 text-[24px] font-bold">Total Employees</h2>
-            <p class="total-employees text-[36px] font-bold"></p>
-           </div>
-           <div class="border-[2px] border-gray-700 p-4 rounded-[10px] h-[150px] w-[240px] flex flex-col items-center gap-2">
-            <h2 class="text-red-800 text-[24px] font-bold">Male Employees</h2>
-            <p class="total-employees text-[36px] font-bold">0</p>
-           </div>
-           <div class="border-[2px] border-gray-700 p-4 rounded-[10px] h-[150px] w-[240px] flex flex-col items-center gap-2">
-            <h2 class="text-red-800 text-[24px] font-bold text-center">Female Employees</h2>
-            <p class="total-employees text-[36px] font-bold">0</p>
-           </div>
+         <main class="flex flex-wrap gap-4 h-fit mx-6 mt-4">
+            <div
+               class="border-[2px] border-gray-700 p-4 rounded-[10px] h-[150px] w-[240px] flex flex-col items-center gap-2">
+               <h2 class="text-red-800 text-[24px] font-bold">
+                  Total Employees
+               </h2>
+               <p class="total-employees text-[36px] font-bold"></p>
+            </div>
+            <div
+               class="border-[2px] border-gray-700 p-4 rounded-[10px] h-[150px] w-[240px] flex flex-col items-center gap-2">
+               <h2 class="text-red-800 text-[24px] font-bold">
+                  Male Employees
+               </h2>
+               <p class="total-employees text-[36px] font-bold">0</p>
+            </div>
+            <div
+               class="border-[2px] border-gray-700 p-4 rounded-[10px] h-[150px] w-[240px] flex flex-col items-center gap-2">
+               <h2 class="text-red-800 text-[24px] font-bold text-center">
+                  Female Employees
+               </h2>
+               <p class="total-employees text-[36px] font-bold">0</p>
+            </div>
          </main>
       </div>
-      <script src="js/script.js"></script>
+      <div class="all-modals"></div>
+      <!-- \ -->
+      <div
+         onclick="closeModal()"
+         id="overlay"
+         class="hidden absolute top-0 left-0 w-full h-full bg-black opacity-65"></div>
+
       <script src="./js/data.js"></script>
       <script src="./pages/all-employees/allEmployees.js"></script>
+      <script src="./js/script.js"></script>
+      <script src="./components/modals-data/modal-content.js"></script>
+      <script src="./components/modals-data/modal-controller.js"></script>
+      <script src="./components/add-employee-modal/add.js"></script>
+      <script src="./components/edit-modal/edit.js"></script>
+      <script src="./components/delete-modal/delete.js"></script>
+      <script src="./components/logout-modal/logout.js"></script>
+      <script src="./js/script.js"></script>
    </body>
 </html>
