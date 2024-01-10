@@ -17,20 +17,24 @@ tableBody.innerHTML=''
                     <td class="px-4 py-2">${employee.department}</td>
                     <td class="px-4 py-2">${employee.position}</td>
                     <td class="px-4 py-2">${employee.dateOfBirth}</td>
-                    <td class="flex fle gap-[10px]">
-                    <button class="bg-black w-[50px] h-[50px]">
+                    <td class="flex">
+                    <button   data-target="#editModal"
+                    class="btn py-3 px-1 w-fit h-fit flex justify-center items-center rounded-md duration-300 transition-all ease-linear hover:bg-yellow-200">
                     <img
-                       id="deleteEmployeeBtn"
-                       class="cursor-pointer h-[30px] w-[30px]"
+                       class="cursor-pointer"
                        src="../../assets/img/edit.svg"
-                       alt="edit icon" width="30" height="30" />
+                       alt="edit icon"
+                       width="30"
+                       height="30" />
                  </button>
-                 <button class="bg-black w-[50px] h-[50px]">
+                 <button  data-target="#deleteModal"
+                    class="btn py-3 px-1 w-fit h-Fw-fit hover:bg-red-600 flex justify-center items-center rounded-md duration-300 transition-all ease-linear">
                     <img
-                       onclick="openDeleteModal(${i})"
-                       class="cursor-pointer h-[30px] w-[30px]"
+                       class="cursor-pointer"
                        src="../../assets/img/delete.svg"
-                       alt="edit icon" width="30" height="30" />
+                       alt="edit icon"
+                       width="30"
+                       height="30" />
                  </button>
 
                     </td>
@@ -43,5 +47,5 @@ tableBody.innerHTML=''
 showEmployees()
 
 const openDeleteModal= function(){
-  
+
 }
