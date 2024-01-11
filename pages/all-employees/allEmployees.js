@@ -6,7 +6,7 @@ if (employees.length) showEmployees();
 counter = 1;
 
 function showEmployees() {
-   const employees = JSON.parse(localStorage.getItem("list"));
+   let employees = JSON.parse(localStorage.getItem("list"));
    tableBody.innerHTML = "";
    employees.forEach((employee, i) => {
       tableBody.innerHTML += `
