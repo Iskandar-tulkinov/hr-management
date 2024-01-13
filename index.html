@@ -13,58 +13,66 @@
    <body class="h-full w-full">
       <div class="flex flex-col md:flex md:flex-row w-full h-full">
          <aside
-            class="flex-col md:flex float-left border-r border-gray-300 bg-gray-300 md:h-full md:max-w-[20rem] font-bold text-gray-300">
-            <div class="flex gap-4 items-center md:px-4 py-2 ">
-              <button
-                 onclick="openDashboard()"
-                 class="sidebar-icon md:hidden active:scale-95">
-                 <span
-                    class="icon-list text-center text-2xl text-black font-bold p-3 w-8 h-8 cursor-pointer rounded-lg hover:text-red-500 hover:bg-gray-300 hover:scale-110 duration-250 ease-in transition-all"></span>
-              </button>
-              <a
-                 class="block text-2xl text-center antialiased font-semibold leading-snug tracking-normal py-2 px-3 text-gray-900 hover:text-red-500 hover:bg-gray-300 rounded-lg duration-250 ease-in transition-all"
-                 href="index.html">
-                 HR Management
-              </a>
-           </div>
-           <div
-           class="dashboard hidden fixed  left-0   md:flex flex-col  md:justify-between    md:min-w-[240px] w-fit h-fit md:w-full  md:h-full  p-2 md:py-8 capitalize bg-gray-300 text-gray-800 duration-200">
-           <div class="flex flex-col text-3xl px-2">
-              <a
-                 href="index.html"
-                 class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start hover:text-white hover:bg-red-600   focus:text-sky-50"
-                 id="home"
-                  ">
-                 <span class="icon-home text-2xl"></span>
-                 Home
-              </a>
-              <a href="./pages/all-employees/allEmployees.html"
-                 class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start bg-red-800 text-white hover:text-gray-200 hover:bg-red-500 focus:text-sky-50"
-                 id="table"
+         class="md:fixed  flex-col md:flex float-left border-r border-gray-300 w-full  md:h-full md:max-w-[20rem] p-4 bg-gray-300 text-gray-300">
+         <div class="flex gap-4 items-center px-4 py-2">
+            <button
+               onclick="openDashboard()"
+               class="sidebar-icon md:hidden active:scale-95">
+               <span
+                  class="icon-list text-center text-2xl text-black font-bold p-3 w-8 h-8 cursor-pointer rounded-lg hover:text-red-500 hover:bg-gray-300 hover:scale-110 duration-250 ease-in transition-all"></span>
+            </button>
+            <a
+               class="block text-2xl text-center antialiased font-semibold leading-snug tracking-normal py-2 px-3 text-gray-900 hover:text-red-500 hover:bg-gray-300 rounded-lg duration-250 ease-in transition-all"
+               href="index.html">
+               HR Management
+            </a>
+         </div>
+         <div
+            class="dashboard hidden fixed  left-0 rounded-lg md:rounded-none   md:flex flex-col  md:justify-between    md:min-w-[240px] w-fit h-fit md:w-full  md:h-full  p-2 md:py-8 capitalize bg-gray-300 text-gray-800 duration-200">
+            <ul class="flex flex-col text-3xl px-2">
+               <li class="dashboardItem">
+                  <a
+                     href="index.html"
+                     class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start text-white bg-red-800 hover:text-white hover:bg-red-600   focus:text-sky-50"
+                     id="home"
+                     ">
+                     <span class="icon-home text-2xl"></span>
+                     Home
+                  </a>
+               </li>
+               <li class="dashboardItem">
+                  <a href="./pages/all-employees/allEmployees.html"
+                     class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start   hover:text-gray-200 hover:bg-red-500 focus:text-sky-50"
+                     id="table"
+                     role="button">
+                     <span class="icon-table2 text-2xl"></span>
+                     Table
+                  </a>
+               </li>
+               <li class="dashboardItem">
+                  <button  data-target="#EmployeeModal"
+                     class="newEmployee flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start  hover:text-white hover:bg-red-600  focus:text-black focus:bg-red-500"
+                     >
+                     <span class="icon-user-plus text-2xl"></span>
+                     Add Employee
+                  </button>
+               </li>
+            </ul>
 
-                 role="button">
-                 <span class="icon-table2 text-2xl"></span>
-                 Table
-              </a>
-              <button
-                 data-target="#addEmployeeModal"
-                 class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start  hover:text-white hover:bg-red-600  focus:text-black focus:bg-red-500"
-                 id="addEmployee"
-                 >
-                 <span class="icon-user-plus text-2xl"></span>
-                 Add Employee
-              </button>
-           </div>
-           <button
-           data-target="#logoutModal"
-           class="flex items-center text-xl w-full p-3 pr-5 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start  hover:text-white hover:bg-red-600  focus:text-black focus:bg-red-500">
-           <span class="icon-log-out text-2xl "></span>
-           Log Out
-        </button>
-        </div>
-         </aside>
+            <ul>
+               <li class="dashboardItem">
+                  <button
+                  data-target="#logoutModal"
+                  class="flex items-center text-xl w-full p-3 pr-5 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start  hover:text-white hover:bg-red-600  focus:text-black focus:bg-red-500">
+                  <span class="icon-log-out text-2xl "></span>
+                  Log Out
+                        </button>
+               </li>
+            </ul>
+         </div>
+      </aside>
 
-         <main class="flex flex-wrap gap-4 h-fit mx-6 mt-4">
+         <main class="flex flex-wrap gap-4 h-fit mx-6 mt-6 md:ml-96 ">
             <div
                class="border-[2px] border-gray-700 p-4 rounded-[10px] h-[150px] w-[240px] flex flex-col items-center gap-2">
                <h2 class="text-red-800 text-[24px] font-bold">
@@ -88,21 +96,22 @@
             </div>
          </main>
       </div>
-      <div class="all-modals"></div>
-      <!-- \ -->
+      
+      <!-- Overlay -->
       <div
          onclick="closeModal()"
          id="overlay"
-         class="hidden absolute top-0 left-0 w-full h-full bg-black opacity-65"></div>
+         class="hidden absolute top-0 left-0 w-full h-full bg-black opacity-50">
+      </div>
 
-      <script src="./js/data.js"></script>
-      <script src="./pages/all-employees/allEmployees.js"></script>
+      <!-- <script src="./js/data.js"></script> -->
+      <!-- <script src="./pages/all-employees/allEmployees.js"></script> -->
       <script src="./js/script.js"></script>
-      <script src="./components/modals-data/modal-content.js"></script>
+      <!-- <script src="./components/modals-data/modal-content.js"></script> -->
       <script src="./components/modals-data/modal-controller.js"></script>
       <script src="./components/add-employee-modal/add.js"></script>
-      <script src="./components/edit-modal/edit.js"></script>
-      <script src="./components/delete-modal/delete.js"></script>
+      <!-- <script src="./components/edit-modal/edit.js"></script> -->
+      <!-- <script src="./components/delete-modal/delete.js"></script> -->
       <script src="./components/logout-modal/logout.js"></script>
    </body>
 </html>
