@@ -133,7 +133,7 @@ function showEmployeesData() {
       ++employee.id % 2 == 0 ? 'bg-slate-300' : 'bg-gray-400'
     } border border-[#696969]">
                     <td class="px-4 py-2 border border-[#696969]   ">${
-                      employee.id + 1
+                      employee.id
                     }</td>
                     <td class="px-4 py-2 border border-[#696969]   capitalize">${
                       employee.fullName
@@ -241,6 +241,7 @@ employeeForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   let newEmployeeDataObj = {
+    id: employeesData.length + 1,
     fullName: fullName.value,
     gender: gender,
     age: age.value,
@@ -251,21 +252,23 @@ employeeForm.addEventListener('submit', (e) => {
 
   if (!isEdit) {
     employeesData.push(newEmployeeDataObj);
-    // saveToLocalStorage()
-    // showEmployeesData()
+    saveToLocalStorage();
+    generatePaginationButtons();
+    displayTable(employeesData, tableBody, rows, currentPage); // Update the table
     closeModal();
   } else {
-    isEdit = false;
-    employeesData[editId] = newEmployeeDataObj;
+    employeesData = employeesData.map((employee) =>
+      employee.id == editId ? newEmployeeDataObj : employee
+    );
+    closeModal();
   }
 
   saveToLocalStorage();
   // submitBtn.value= "Submit"
   modalTitle.textContent = "Add new employee's data";
-  showEmployeesData();
-
-  // addEmployeeForm.reset();
+  displayTable(employeesData, tableBody, rows, currentPage); // Update the table
 });
+
 // editDataModal(i,fullName,gender,age,department,position,dateOfBirth);
 
 // Pagination
@@ -304,9 +307,9 @@ function displayTable(tableRows, wrapper, rowsPerPage, page) {
 
     let createElement = `
         <tr class="employeeDetails ${
-          employee.id % 2 === 0 ? 'bg-slate-300' : 'bg-gray-400'
+          index % 2 === 0 ? 'bg-slate-300' : 'bg-gray-400'
         } border border-[#696969]">
-            <td class="px-4 py-2 border border-[#696969]">${employee.id}</td>
+            <td class="px-4 py-2 border border-[#696969]">${index}</td>
             <td class="px-4 py-2 border border-[#696969] capitalize">${
               employee.fullName
             }</td>
