@@ -54,7 +54,7 @@ const generateRandomId = function (length) {
 
    return randomId;
 };
-const employeeID= generateRandomId(8)
+// const employeeID= generateRandomId(8)
 // Function to add a new employee
 
 // Initial data
@@ -194,7 +194,7 @@ function deleteData(employeeID) {
        saveToLocalStorage();
        closeModal();
        showMessage(employee.fullName, "'s data has been deleted!", 'bg-red-500');
-       showEmployeesData();
+       showEmployeesData(currentPage);
       // location.reload()
        // Remove the event listener after it has been executed
        deleteBtn.removeEventListener('click', onDeleteBtnClick);
@@ -215,7 +215,7 @@ form.addEventListener("submit", (e) => {
   }
    e.preventDefault();
     const information = {
-      id: isEdit ? editId : employeeID,
+      id: isEdit ? editId : generateRandomId(8),
       fullName: name.value,
       gender: genderEl,
       age: age.value,
@@ -230,21 +230,16 @@ form.addEventListener("submit", (e) => {
     employeesData = employeesData.map((employee) =>
       employee.id === editId ? information : employee
       );
-   saveToLocalStorage();
-   showEmployeesData();
-
   } else {
     // Add a new employee
     employeesData.push(information);
-   saveToLocalStorage();
-   showEmployeesData();
 
   }
 
    submitBtn.textContent='Submit'
    modalTitle.textContent = "Add new employee's data";
    saveToLocalStorage();
-   showEmployeesData();
+   showEmployeesData(currentPage);
    closeModal();
 });
 
