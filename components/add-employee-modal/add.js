@@ -56,7 +56,7 @@ let employeesData = [
   },
   {
     id: 2,
-   age: 16,
+    age: 16,
     fullName: 'Sarah Jim',
     gender: 'Female',
     department: 'Marketing',
@@ -65,7 +65,7 @@ let employeesData = [
   },
   {
     id: 3,
-      age: 11,
+    age: 11,
     fullName: 'Tom Jerry',
     gender: 'Male',
     department: 'IT',
@@ -74,7 +74,7 @@ let employeesData = [
   },
   {
     id: 4,
-      age: 41,
+    age: 41,
     fullName: 'Black Smith',
     gender: 'Male',
     department: 'IT',
@@ -83,7 +83,7 @@ let employeesData = [
   },
   {
     id: 5,
-      age: 13,
+    age: 13,
     fullName: 'Jack Lee',
     gender: 'Male',
     department: 'Marketing',
@@ -92,7 +92,7 @@ let employeesData = [
   },
   {
     id: 6,
-      age: 22,
+    age: 22,
     fullName: 'Sottixon ',
     gender: 'Female',
     department: 'Marketing',
@@ -101,208 +101,12 @@ let employeesData = [
   },
 ];
 
-localStorage.setItem('list', JSON.stringify(employeesData));
-// Fetch data from localStorage if it is available
-employeesData = localStorage.getItem('list')
-  ? JSON.parse(localStorage.getItem('list'))
-  : [];
-
-function saveToLocalStorage() {
-  localStorage.setItem('list', JSON.stringify(employeesData));
-}
-
-function openAddEmployeeModal() {
-  employeeModal.classList.remove('hidden');
-  overlay.classList.remove('hidden');
-  isEdit = false;
-  employeeForm.reset();
-}
-
-if (employeesData.length) showEmployeesData();
-
-function showEmployeesData() {
-  employeesData = JSON.parse(localStorage.getItem('list'));
-  document
-    .querySelectorAll('.employeeDetails')
-    .forEach((info) => info.remove());
-  tableBody.innerHTML = '';
-  employeesData.forEach((employee) => {
-    let createElement = `
-    <tr class="employeeDetails ${
-      ++employee.id % 2 == 0 ? 'bg-slate-300' : 'bg-gray-400'
-    } border border-[#696969]">
-                    <td class="px-4 py-2 border border-[#696969]   ">${
-                      employee.id
-                    }</td>
-                    <td class="px-4 py-2 border border-[#696969]   capitalize">${
-                      employee.fullName
-                    }</td>
-                    <td class="px-4 py-2 border border-[#696969]   capitalize">${
-                      employee.gender
-                    }</td>
-                    <td class="px-4 py-2 border border-[#696969]   ">${
-                      employee.age
-                    }</td>
-                    <td class="px-4 py-2 border border-[#696969]  ">${
-                      employee.department
-                    }</td>
-                    <td class="px-4 py-2 border border-[#696969]   capitalize">${
-                      employee.position
-                    }</td>
-                    <td class="px-4 py-2 border border-[#696969]  ">${
-                      employee.dateOfBirth
-                    }</td>
-                    <td class="flex justify-center w-full h-full">
-                    <button    onclick="editDataModal(${employee.id},${
-      employee.fullName
-    },${employee.gender},${employee.age},${employee.department},${
-      employee.position
-    },${employee.dateOfBirth})"
-  class="btn py-3 px-1 w-fit h-fit flex justify-center items-center rounded-md duration-300 transition-all ease-linear hover:bg-yellow-200">
-  <img
-     class="cursor-pointer"
-     src="../../assets/img/edit.svg"
-     alt="edit icon"
-     width="30"
-     height="30" />
-</button>
-<button   onclick="deleteDataModal(${employee.id})"
-class="btn py-3 px-1 w-fit h-Fw-fit hover:bg-red-600 flex justify-center items-center rounded-md duration-300 transition-all ease-linear">
-<img
-   class="cursor-pointer"
-   src="../../assets/img/delete.svg"
-   alt="edit icon"
-   width="30"
-   height="30" />
-</button>
-
-                    </td>
-                 </tr>
-    `;
-    tableBody.innerHTML += createElement;
-  });
-}
-showEmployeesData();
-// ADD
-
-function editDataModal(
-  index,
-  fullName,
-  gender,
-  age,
-  department,
-  position,
-  dateOfBirth
-) {
-  console.log({
-    index,
-    fullName,
-    gender,
-    age,
-    department,
-    position,
-    dateOfBirth,
-  });
-  isEdit = true;
-  editId = index;
-  fullName.value = fullName;
-  gender.value = gender;
-  age.value = age;
-  department.textContent = department;
-  position.value = position;
-  dateOfBirth.value = dateOfBirth;
-
-  submitBtn = 'Save changes';
-  // console.log(submitBtn.value);
-  modalTitle.textContent = 'Edit employees data';
-
-  saveToLocalStorage();
-  showEmployeesData();
-}
-
-function deleteDataModal(employeeId) {
-  if (confirm('Are you sure want to delete?')) {
-    console.log('employeeId', employeeId);
-    console.log('employeeId', employeesData);
-
-    employeesData = employeesData.filter(
-      (employee) => employee.id != employeeId
-    );
-
-    console.log(employeesData);
-    generatePaginationButtons();
-    saveToLocalStorage();
-    showEmployeesData();
-  }
-}
-
-employeeForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  console.log(genderElements);
-  for (const element of genderElements) {
-    if (element.checked) {
-      gender = element.id;
-      console.log('gender is ' + gender);
-
-      break; // Exit the loop once a checked element is found
-    }
-  }
-  console.log('gender is ' + gender);
-
-  let newEmployeeDataObj = {
-    id: employeesData.length + 1,
-    fullName: fullName.value,
-    gender: gender,
-    age: age.value,
-    department: department.textContent,
-    position: position.value,
-    dateOfBirth: dateOfBirth.value,
-  };
-
-  if (!isEdit) {
-    employeesData.push(newEmployeeDataObj);
-    saveToLocalStorage();
-    generatePaginationButtons();
-    displayTable(employeesData, tableBody, rows, currentPage); // Update the table
-    closeModal();
-  } else {
-    employeesData = employeesData.map((employee) =>
-      employee.id == editId ? newEmployeeDataObj : employee
-    );
-    closeModal();
-  }
-
-  saveToLocalStorage();
-  // submitBtn.value= "Submit"
-  modalTitle.textContent = "Add new employee's data";
-  displayTable(employeesData, tableBody, rows, currentPage); // Update the table
-});
-
-// editDataModal(i,fullName,gender,age,department,position,dateOfBirth);
-
 // Pagination
 // tableBody-list
 // employeesData- list_item
 const PaginationEl = document.querySelector('.pagination');
 let currentPage = 1;
 let rows = 5;
-
-// Calculate the total number of pages
-
-// Function to generate pagination buttons
-function generatePaginationButtons() {
-  const totalPages = Math.ceil(employeesData.length / rows);
-
-  let buttonsHTML = '';
-  for (let i = 1; i <= totalPages; i++) {
-    buttonsHTML += `<button class="border py-3 px-4  bg-slate-500" onclick="changePage(${i})">${i}</button>`;
-  }
-  PaginationEl.innerHTML = buttonsHTML;
-}
-
-// Initial display
-generatePaginationButtons();
 
 function displayTable(tableRows, wrapper, rowsPerPage, page) {
   wrapper.innerHTML = '';
@@ -337,11 +141,7 @@ function displayTable(tableRows, wrapper, rowsPerPage, page) {
               employee.dateOfBirth
             }</td>
             <td class="flex justify-center w-full h-full">
-                <button onclick="editDataModal(${employee.id},'${
-      employee.fullName
-    }','${employee.gender}',${employee.age},'${employee.department}','${
-      employee.position
-    }','${employee.dateOfBirth}')"
+                <button onclick="editDataModal(${employee.id})"
                     class="btn py-3 px-1 w-fit h-fit flex justify-center items-center rounded-md duration-300 transition-all ease-linear hover:bg-yellow-200">
                     <img class="cursor-pointer" src="../../assets/img/edit.svg" alt="edit icon" width="30" height="30" />
                 </button>
@@ -364,3 +164,124 @@ function changePage(page) {
   currentPage = page;
   displayTable(employeesData, tableBody, rows, currentPage);
 }
+
+localStorage.setItem('list', JSON.stringify(employeesData));
+// Fetch data from localStorage if it is available
+employeesData = localStorage.getItem('list')
+  ? JSON.parse(localStorage.getItem('list'))
+  : [];
+
+function saveToLocalStorage() {
+  localStorage.setItem('list', JSON.stringify(employeesData));
+}
+
+function openAddEmployeeModal() {
+  employeeModal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+  isEdit = false;
+  //   employeeForm.reset();
+}
+
+function editDataModal(employeeId) {
+  const employee = employeesData.find((employee) => employee.id === employeeId);
+
+  console.log(age, department, position, dateOfBirth);
+  isEdit = true;
+  editId = employee.id;
+  fullName.value = employee.fullName;
+
+  // Check the gender radio button that matches the employee's gender
+  genderElements.forEach((element) => {
+    element.checked = element.id === employee.gender;
+  });
+
+  age.value = employee.age;
+  department.textContent = employee.department;
+  position.value = employee.position;
+  // Assuming 'employee' is the employee object
+  const dobParts = employee.dateOfBirth.split('.'); // Assuming dateOfBirth is in 'DD.MM.YYYY' format
+  const formattedDate = `${dobParts[2]}-${dobParts[1]}-${dobParts[0]}`;
+  dateOfBirth.value = formattedDate;
+
+  // Update the modal title
+  modalTitle.textContent = 'Edit Employee Data';
+
+  // Open the modal
+  openAddEmployeeModal();
+}
+
+function deleteDataModal(employeeId) {
+  if (confirm('Are you sure want to delete?')) {
+    console.log('employeeId', employeeId);
+    console.log('employeeId', employeesData);
+
+    employeesData = employeesData.filter(
+      (employee) => employee.id != employeeId
+    );
+
+    console.log(employeesData);
+    generatePaginationButtons();
+    saveToLocalStorage();
+    // Removed the call to showEmployeesData
+  }
+}
+
+employeeForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  console.log(genderElements);
+  for (const element of genderElements) {
+    if (element.checked) {
+      gender = element.id;
+      console.log('gender is ' + gender);
+
+      break; // Exit the loop once a checked element is found
+    }
+  }
+  console.log('gender is ' + gender);
+
+  let newEmployeeDataObj = {
+    id: employeesData.length + 1,
+    fullName: fullName.value,
+    gender: gender,
+    age: age.value,
+    department: department.textContent,
+    position: position.value,
+    dateOfBirth: dateOfBirth.value,
+  };
+
+  if (isEdit) {
+    employeesData.push(newEmployeeDataObj);
+    saveToLocalStorage();
+    generatePaginationButtons();
+    displayTable(employeesData, tableBody, rows, currentPage); // Update the table
+    closeModal();
+  } else {
+    employeesData = employeesData.map((employee) =>
+      employee.id == editId ? newEmployeeDataObj : employee
+    );
+    closeModal();
+  }
+
+  saveToLocalStorage();
+  // submitBtn.value= "Submit"
+  modalTitle.textContent = "Add new employee's data";
+  displayTable(employeesData, tableBody, rows, currentPage); // Update the table
+});
+
+// editDataModal(i,fullName,gender,age,department,position,dateOfBirth);
+
+// Calculate the total number of pages
+
+// Function to generate pagination buttons
+function generatePaginationButtons() {
+  const totalPages = Math.ceil(employeesData.length / rows);
+
+  let buttonsHTML = '';
+  for (let i = 1; i <= totalPages; i++) {
+    buttonsHTML += `<button class="border py-3 px-4  bg-slate-500" onclick="changePage(${i})">${i}</button>`;
+  }
+  PaginationEl.innerHTML = buttonsHTML;
+}
+
+// Initial display
+generatePaginationButtons();
