@@ -58,44 +58,44 @@ if(element.checked){
 
 });
 
-// // Initial data
-// let employeesData = [
-//    {
-//       fullName: "Johny Depp",
-//       gender: "Male",
-//       age: 34,
-//       department: "Accounting",
-//       position: "Chief Accountant",
-//       dateOfBirth: "01.10.1990",
-//    },
-//    {
-//       fullName: "Sarah Jim",
-//       gender: "Female",
-//       age: 25,
-//       department: "Marketing",
-//       position: "Chief Marketolog",
-//       dateOfBirth:"21.01.1999",
-//    },{
-//       fullName: "Tom Jerry",
-//       gender: "Male",
-//       age: 26,
-//       department: "IT",
-//       position: "Data Scientist",
-//       dateOfBirth: "21.12.1998",
-//    },
-//    {fullName:'Black Smith',gender:'Male',age:44,department:'IT',position:'Product Manager',dateOfBirth:"21.04.1980",},
-//    {
-//       fullName: "Casy Candy ",
-//       gender: "Female",
-//       age: 29,
-//       department: "Marketing",
-//       position: "Sales Operator",
-//       dateOfBirth: "19.09.1995",
-//    },
-// ];
+// Initial data
+let employeesData = [
+   {
+      fullName: "Johny Depp",
+      gender: "Male",
+      age: 34,
+      department: "Accounting",
+      position: "Chief Accountant",
+      dateOfBirth: "01.10.1990",
+   },
+   {
+      fullName: "Sarah Jim",
+      gender: "Female",
+      age: 25,
+      department: "Marketing",
+      position: "Chief Marketolog",
+      dateOfBirth:"21.01.1999",
+   },{
+      fullName: "Tom Jerry",
+      gender: "Male",
+      age: 26,
+      department: "IT",
+      position: "Data Scientist",
+      dateOfBirth: "21.12.1998",
+   },
+   {fullName:'Black Smith',gender:'Male',age:44,department:'IT',position:'Product Manager',dateOfBirth:"21.04.1980",},
+   {
+      fullName: "Casy Candy ",
+      gender: "Female",
+      age: 29,
+      department: "Marketing",
+      position: "Sales Operator",
+      dateOfBirth: "19.09.1995",
+   },
+];
 
 // Fetch data from localStorage if it is available
-let employeesData = localStorage.getItem("list")
+ employeesData = localStorage.getItem("list")
    ? JSON.parse(localStorage.getItem("list"))
    : [];
 
@@ -116,48 +116,53 @@ newEmployeeBtn.addEventListener("click",()=>{
 
 
 
-function showEmployeesData() {
-   employeesData = JSON.parse(localStorage.getItem("list"));
-   tableBody.innerHTML = "";
-   employeesData.forEach((employee, index) => {
-      tableBody.innerHTML += `
-    <tr class="employeeDetails ${index % 2 === 0 ? "bg-slate-300":"bg-gray-400"} border border-[#696969]">
-                    <td class="px-4 py-2 border border-[#696969] ">${index+1}</td>
-                    <td class="px-4 py-2 border border-[#696969] capitalize">${employee.fullName}</td>
-                    <td class="px-4 py-2 border border-[#696969] capitalize">${employee.gender}</td>
-                    <td class="px-4 py-2 border border-[#696969]">${employee.age}</td>
-                    <td class="px-4 py-2 border border-[#696969]">${employee.department}</td>
-                    <td class="px-4 py-2 border border-[#696969] capitalize">${employee.position}</td>
-                    <td class="px-4 py-2 border border-[#696969]">${employee.dateOfBirth}</td>
-                    <td class="flex justify-center w-full h-full">
-  <button onclick="editData(${index},${employee.fullName},${employee.gender},${employee.age},${employee.department},${employee.position},${employee.dateOfBirth})" class="btn  py-3 px-1 w-fit h-fit flex justify-center items-center rounded-md duration-300 transition-all ease-linear hover:bg-yellow-300 cursor-pointer">
-  <img
-     src="../../assets/img/edit.svg"
-     alt="Edit icon"
-     width="30"
-     height="30" />
-</button>
-<button data-target="#deleteModal" onclick="deleteData(${index})"
-class="btn py-3 px-1 w-fit h-Fw-fit hover:bg-red-600 flex justify-center items-center rounded-md duration-300 transition-all ease-linear cursor-pointer">
-<img
-   src="../../assets/img/delete.svg"
-   alt="Delete icon"
-   width="30"
-   height="30" />
-</button>
+// function showEmployeesData() {
+//    employeesData = JSON.parse(localStorage.getItem("list"));
+//    tableBody.innerHTML = "";
+//    employeesData.forEach((employee, index) => {
+//       tableBody.innerHTML += `
+//     <tr class="employeeDetails ${index % 2 === 0 ? "bg-slate-300":"bg-gray-400"} border border-[#696969]">
+//                     <td class="px-4 py-2 border border-[#696969] ">${index+1}</td>
+//                     <td class="px-4 py-2 border border-[#696969] capitalize">${employee.fullName}</td>
+//                     <td class="px-4 py-2 border border-[#696969] capitalize">${employee.gender}</td>
+//                     <td class="px-4 py-2 border border-[#696969]">${employee.age}</td>
+//                     <td class="px-4 py-2 border border-[#696969]">${employee.department}</td>
+//                     <td class="px-4 py-2 border border-[#696969] capitalize">${employee.position}</td>
+//                     <td class="px-4 py-2 border border-[#696969]">${employee.dateOfBirth}</td>
+//                     <td class="flex justify-center w-full h-full">
+//   <button onclick="editData(${index},${employee.fullName},${employee.gender},${employee.age},${employee.department},${employee.position},${employee.dateOfBirth})" class="btn editBtn py-3 px-1 w-fit h-fit flex justify-center items-center rounded-md duration-300 transition-all ease-linear hover:bg-yellow-300 cursor-pointer">
+//   <img
+//      src="../../assets/img/edit.svg"
+//      alt="Edit icon"
+//      width="30"
+//      height="30" />
+// </button>
+// <button data-target="#deleteModal" onclick="deleteData(${index})"
+// class="btn py-3 px-1 w-fit h-Fw-fit hover:bg-red-600 flex justify-center items-center rounded-md duration-300 transition-all ease-linear cursor-pointer">
+// <img
+//    src="../../assets/img/delete.svg"
+//    alt="Delete icon"
+//    width="30"
+//    height="30" />
+// </button>
 
-                    </td>
-                 </tr>
-    `;
+//                     </td>
+//                  </tr>
+//     `;
 
-   });
-}
-
+//    });
+// }
+const editBtns= document.querySelectorAll(".editBtn")
+editBtns.forEach(editbtn=>{
+   editbtn.addEventListener('click',()=>{
+      document.body.classList.add('overflow-hidden');
+      employeeModal.classList.remove(`hidden`);
+      employeeModal.classList.add("overflow-y-scroll")
+      overlay.classList.remove("hidden");
+      console.log(employeesData);
+   })
+})
 function editData(index,employeeName,employeeGender,employeeAge,employeeDepartment,employeePosition,employeeDateOfBirth){
-   document.body.classList.add('overflow-hidden');
-   employeeModal.classList.remove(`hidden`);
-   employeeModal.classList.add("overflow-y-scroll")
-   overlay.classList.remove("hidden");
 
   isEdit=true;
   editId=index;
@@ -175,22 +180,7 @@ function editData(index,employeeName,employeeGender,employeeAge,employeeDepartme
 //   showEmployeesData()
 }
 
-// function deleteData(index){
-// document.getElementById('deleteModal').classList.remove('hidden');
-// overlay.classList.remove('hidden');
-// document.body.classList.add('overflow-hidden');;
-// const deleteBtn = document.querySelector(".deleteBtn");
 
-// deleteBtn.addEventListener('click',()=>{
-//    employeesData.splice(index,1)
-//    saveToLocalStorage()
-//    showEmployeesData()
-//    closeModal()
-//    showMessage(index,'data has been deleted!','bg-red-500')
-
-// })
-// }
-//
 function deleteData(index) {
    document.getElementById('deleteModal').classList.remove('hidden');
    overlay.classList.remove('hidden');
@@ -204,8 +194,8 @@ function deleteData(index) {
        saveToLocalStorage();
        showEmployeesData();
        closeModal();
-       showMessage(index, 'data has been deleted!', 'bg-red-500');
-      location.reload()
+       showMessage(information.fullName, "'s data has been deleted!", 'bg-red-500');
+      // location.reload()
        // Remove the event listener after it has been executed
        deleteBtn.removeEventListener('click', onDeleteBtnClick);
    }
@@ -217,7 +207,16 @@ function deleteData(index) {
 //
 
 form.addEventListener("submit", (e) => {
-   // e.preventDefault();
+  for (const element of genderElements) {
+    if (element.checked) {
+      genderEl = element.id;
+      console.log('gender is ' + genderEl);
+      break; // Exit the loop once a checked element is found
+    }
+  }
+//   console.log('gender is ' + genderEl);
+   e.preventDefault();
+
    const information = {
       fullName: name.value,
       gender: genderEl,
@@ -229,18 +228,18 @@ form.addEventListener("submit", (e) => {
 
    if (!isEdit) {
       employeesData.push(information);
-      saveToLocalStorage();
-      showEmployeesData();
-      closeModal();
-      showMessage(information.index,'data saved successfully!','bg-green-500')
+      showMessage(information.fullName,'data saved successfully!','bg-green-500')
    } else {
       isEdit = false;
       employeesData[editId] = information;
    }
-   // saveToLocalStorage();
+
+
    submitBtn.textContent='Submit'
    modalTitle.textContent = "Add new employee's data";
-   // showEmployeesData();
+   saveToLocalStorage();
+   showEmployeesData();
+   closeModal();
 });
 
 
@@ -301,24 +300,21 @@ function logout() {
 
 
 // Pagination
-// tableBody-list_element(table)
-// employeesData- list_item
+
 const paginationWrapper = document.querySelector(".paginationContainer");
 let currentPage = 1;
 let rows = 5;
 let per5=1 ;
 per5*=rows;
 
-if(tableBody.length <= 5){
+if(employeesData.length <= 5){
    paginationWrapper.classList.toggle('hidden')
 }else{
    // location.reload()
    paginationWrapper.classList.remove("hidden")
 }
-
  // Example usage
  const itemsPerPage = 5;
-//  let currentPage = 1;
 
 //  const employeesData = JSON.parse(localStorage.getItem('list')) || [];
  const totalPages = Math.ceil(employeesData.length / itemsPerPage);
@@ -332,10 +328,8 @@ function paginateArray(array, itemsPerPage, currentPage) {
  }
 
  function showEmployeesData(currentPage) {
-   const itemsPerPage = 5; // Set the number of items per page
-   // const tableBody = document.getElementById('tableBody');
+   const itemsPerPage = 5;
 
-   // Retrieve data from localStorage
    const employeesData = JSON.parse(localStorage.getItem('list')) || [];
 
    // Paginate the data
@@ -400,3 +394,33 @@ function paginateArray(array, itemsPerPage, currentPage) {
 
  updatePaginationButtons(totalPages, currentPage);
  if (employeesData.length) showEmployeesData(currentPage);
+
+
+ // search validation
+ const searchInput= document.getElementById("search");
+
+ //  searchInputValue.length>0? tableBody.innerHTML='':tableBody;
+ searchInput.addEventListener("input",handSearchInput)
+ function handSearchInput(){
+   const searchInputValue=searchInput.value.trim().toLowerCase();
+   const matches=getMatchingValue(searchInputValue);
+   displaySearchResult(matches);
+}
+function getMatchingValue (searchInputValue) {
+   const matches=[];
+   // FilterName
+
+
+}
+//  function searchByName(inputValue){
+//    employeesData.forEach(employee=>{
+//       if(employee.fullName.toLowerCase().includes(inputValue.toLowerCase()))
+
+//    }
+//    )
+//     const   searchedName=employeesData.filter(data=>data.fullName.toLowerCase().icludes(inputValue.toLowerCase()))
+//     tableBody.innerHTML=''
+//     return searchedName;
+//  }
+//  searchByName(searchInputValue)
+//  log
