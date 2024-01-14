@@ -24,3 +24,23 @@ if (window.innerWidth >= 768) {
 }else{
   dashboard.classList.add("fixed")
 };
+
+
+const closeSidebar= document.querySelector('.closeSidebar')
+const sideBar= document.querySelector(".sideBar")
+closeSidebar.addEventListener("click",()=>{
+  sideBar.classList.add('hidden','md:hidden','translate-x-[-100%')
+  sideBar.classList.remove('md:h-full')
+  openSidebar.classList.remove("translate-x-[-100%")
+})
+
+const openSidebar =document.querySelector(".openSidebar")
+openSidebar.addEventListener('click',()=>{
+  sideBar.classList.remove("hidden","md:hidden" ,'translate-x-[-100%]')
+  sideBar.classList.add('md:h-full')
+  openSidebar.classList.add("translate-x-[-100%")
+})
+// hidden md:block
+// const closeSidebar=()=>{
+//   dashboard.classList.toggle("hidden")
+// }

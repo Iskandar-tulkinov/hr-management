@@ -21,8 +21,8 @@
 
    <div class="flex flex-col  md:flex-row w-full h-full">
       <aside
-         class="md:fixed  flex-col md:flex float-left border-r border-gray-300 w-full  md:h-full md:max-w-[20rem] p-4 bg-gray-300 text-gray-300 z-10">
-         <div class="flex gap-4 items-center px-4 py-2">
+         class="sideBar md:fixed  flex-col md:flex   w-full  md:h-full md:max-w-[20rem] text-gray-300 z-10">
+         <header class="flex gap-4 items-center px-8 py-2 bg-gray-300 duration-500 transition-all ease-linear">
             <button onclick="openDashboard()" class="sidebar-icon md:hidden active:scale-95">
                <span
                   class="icon-list text-center text-2xl text-black font-bold p-3 w-8 h-8 cursor-pointer rounded-lg hover:text-red-500 hover:bg-gray-300 hover:scale-110 duration-250 ease-in transition-all"></span>
@@ -31,9 +31,9 @@
                href="allEmployees.html">
                HR Management
             </a>
-         </div>
+         </header>
          <div
-            class="dashboard hidden z-10 fixed  left-0 rounded-lg md:rounded-none   md:flex flex-col  md:justify-between    md:min-w-[240px] w-fit h-fit md:w-full  md:h-full  p-2 md:py-8 capitalize bg-gray-300 text-gray-800 duration-200">
+            class="dashboard hidden z-10 fixed  left-0 rounded-lg md:rounded-none   md:flex flex-col  md:justify-between    md:min-w-[240px] w-fit h-fit md:w-full  md:h-full  p-4 md:py-8 capitalize bg-gray-300 text-gray-800 duration-200">
             <ul class="flex flex-col text-3xl px-2">
                <li class="dashboardItem">
                   <a href="../../index.html"
@@ -68,45 +68,60 @@
                      Log Out
                   </button>
                </li>
+               <li class="dashboardItem">
+                  <button
+                     class="closeSidebar flex items-center text-xl w-full p-3 pr-5 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start  hover:text-white hover:bg-red-600  focus:text-black focus:bg-red-500">
+
+                     Close Sidabar
+                  </button>
+               </li>
             </ul>
          </div>
       </aside>
 
-      <main class="mt-6  md:mx-auto md:mr-24 flex flex-col items-end  justify-start   w-full   gap-2  z-0">
-
-         <form class="flex justify-start mb-3 sticky left-1 ">
-            <input
-               class="py-2 px-3 border-2 border-blue-300 rounded-lg focus:border-blue-400 shadow-sm ring-1 shadow-blue-100 outline-none capitalize font-medium"
-               type="text" name="search" id="search" placeholder="Search data...">
-         </form>
-
-         <table class="border rounded-tl-lg rounded-tr-lg overflow-hidden ">
-            <thead class="border  border-[#696969] ">
-               <tr class="border bg-slate-800 text-[#efefef] text-[18px] md:text-[28px]">
-                  <th class="border border-[#696969] px-5 py-2">No</th>
-                  <th class="border border-[#696969] px-5 py-2">Name</th>
-                  <th class="border border-[#696969] px-5 py-2">Gender</th>
-                  <th class="border border-[#696969] px-5 py-2">Age</th>
-                  <th class="border border-[#696969] px-5 py-2">Department</th>
-                  <th class="border border-[#696969] px-5 py-2">Position</th>
-                  <th class="border border-[#696969] px-5 py-2">Date of birth</th>
-                  <th class="border border-[#696969] px-5 py-2">Actions</th>
-
-            </thead>
-
-            <tbody id="tableBody" class=" border rounded-bl-lg rounded-br-lg">
-               <!-- Employee Table -->
-
-            </tbody>
-         </table>
-         <div class="paginationContainer    flex w-full justify-end gap-4 md:gap-8  md:fixed   md:bottom-8">
-
-         </div>
+      <main class="flex flex-col w-full h-full">
+         <header class="flex  items-center pl-8 py-2 bg-gray-300 border">
+            <button onclick="openDashboard()" class="sidebar-icon md:hidden active:scale-95">
+               <span
+                  class="icon-list text-center text-2xl text-black font-bold p-3 w-8 h-8 cursor-pointer rounded-lg hover:text-red-500 hover:bg-gray-300 hover:scale-110 duration-250 ease-in transition-all"></span>
+            </button>
+            <a class="block text-2xl text-center antialiased font-semibold leading-snug tracking-normal py-2 px-3 text-gray-900 hover:text-red-500 hover:bg-gray-300 rounded-lg duration-250 ease-in transition-all"
+               href="allEmployees.html">
+               HR Management
+            </a>
+         </header>
+         <section class="mt-6 pr-4 md:mx-auto  flex flex-col items-end  justify-start h-full w-full gap-2 z-0 overflow-x-auto">
+            <form class="flex justify-end mb-3 sticky left-1 ">
+               <input
+                  class="py-2 px-3 border-2 border-blue-300 rounded-lg focus:border-blue-400 shadow-sm ring-1 shadow-blue-100 outline-none capitalize font-medium"
+                  type="text" name="search" id="search" placeholder="Search data...">
+            </form>
+            <table class="border rounded-tl-lg rounded-tr-lg   ">
+               <thead class="border  border-[#696969] ">
+                  <tr class="border bg-slate-800 text-[#efefef] text-[18px] md:text-[28px]">
+                     <th class="border border-[#696969] px-5 py-2">No</th>
+                     <th class="border border-[#696969] px-5 py-2">Name</th>
+                     <th class="border border-[#696969] px-5 py-2">Gender</th>
+                     <th class="border border-[#696969] px-5 py-2">Age</th>
+                     <th class="border border-[#696969] px-5 py-2">Department</th>
+                     <th class="border border-[#696969] px-5 py-2">Position</th>
+                     <th class="border border-[#696969] px-5 py-2">Date of birth</th>
+                     <th class="border border-[#696969] px-5 py-2">Actions</th>
+               </thead>
+               <tbody id="tableBody" class=" border rounded-bl-lg rounded-br-lg">
+                  <!-- Employee Table -->
+               </tbody>
+            </table>
+            <div class="paginationContainer    flex w-full justify-end gap-4 md:gap-8 ">
+            </div>
+         </section>
 
 
       </main>
    </div>
-
+   <div class="openSidebar hidden md:block capitalize absolute left-3 bottom-3 bg-gray-300 py-3 px-4 rounded-lg  hover:bg-red-500 text-2xl hover:text-white active:scale-95 cursor-pointer duration-500 transition-all ease-linear">
+Open sidebar
+   </div>
    <div class="all-modals">
       <!-- Delete modal ----------->
       <div id="deleteModal"
@@ -269,9 +284,9 @@
    <!-- <script src="../../components/delete-modal/delete.js"></script> -->
    <script src="../../components/modals-data/modal-controller.js"></script>
    <!-- <script src="../../components/edit-modal/edit.js"></script> -->
-
    <script src="../../components/add-employee-modal/add.js"></script>
    <script src="../../js/script.js"></script>
+
 </body>
 
 </html>
