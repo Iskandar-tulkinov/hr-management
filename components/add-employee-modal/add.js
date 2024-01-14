@@ -178,7 +178,6 @@ function saveToLocalStorage() {
 function openAddEmployeeModal() {
   employeeModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
-  isEdit = false;
   //   employeeForm.reset();
 }
 
@@ -189,7 +188,6 @@ function editDataModal(employeeId) {
   isEdit = true;
   editId = employee.id;
   fullName.value = employee.fullName;
-
   // Check the gender radio button that matches the employee's gender
   genderElements.forEach((element) => {
     element.checked = element.id === employee.gender;
@@ -228,19 +226,19 @@ function deleteDataModal(employeeId) {
 
 employeeForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log(genderElements);
+
+  // Get the selected gender
+  let gender = '';
   for (const element of genderElements) {
     if (element.checked) {
       gender = element.id;
-      console.log('gender is ' + gender);
-
-      break; // Exit the loop once a checked element is found
+      break;
     }
   }
-  console.log('gender is ' + gender);
 
-  let newEmployeeDataObj = {
-    id: employeesData.length + 1,
+  // Create an object with the employee data
+  const newEmployeeDataObj = {
+    id: isEdit ? editId : employeesData.length + 1,
     fullName: fullName.value,
     gender: gender,
     age: age.value,
@@ -249,24 +247,36 @@ employeeForm.addEventListener('submit', (e) => {
     dateOfBirth: dateOfBirth.value,
   };
 
+  // Check if it's an edit or add operation
+  console.log('isEdit', isEdit);
   if (isEdit) {
-    employeesData.push(newEmployeeDataObj);
-    saveToLocalStorage();
-    generatePaginationButtons();
-    displayTable(employeesData, tableBody, rows, currentPage); // Update the table
-    closeModal();
-  } else {
+    // Edit an existing employee
     employeesData = employeesData.map((employee) =>
-      employee.id == editId ? newEmployeeDataObj : employee
+      employee.id === editId ? newEmployeeDataObj : employee
     );
-    closeModal();
+  } else {
+    // Add a new employee
+    employeesData.push(newEmployeeDataObj);
   }
 
+  // Save to local storage and update the displayed data
   saveToLocalStorage();
-  // submitBtn.value= "Submit"
-  modalTitle.textContent = "Add new employee's data";
-  displayTable(employeesData, tableBody, rows, currentPage); // Update the table
+  generatePaginationButtons();
+  displayTable(employeesData, tableBody, rows, currentPage);
+
+  // Reset the form and close the modal
+  employeeForm.reset();
+  closeModal();
 });
+
+function closeModal() {
+  modals.forEach((modal) => {
+    modal.classList.add('hidden');
+  });
+  overlay.classList.add('hidden');
+  document.body.classList.remove('overflow-hidden');
+  isEdit = false
+}
 
 // editDataModal(i,fullName,gender,age,department,position,dateOfBirth);
 
