@@ -47,6 +47,7 @@ const genderElements = Array.from(
 let employeesData = [
   {
     id: 1,
+    age: 30,
     fullName: 'Johny Depp',
     gender: 'Male',
     department: 'Accounting',
@@ -55,6 +56,7 @@ let employeesData = [
   },
   {
     id: 2,
+   age: 16,
     fullName: 'Sarah Jim',
     gender: 'Female',
     department: 'Marketing',
@@ -63,6 +65,7 @@ let employeesData = [
   },
   {
     id: 3,
+      age: 11,
     fullName: 'Tom Jerry',
     gender: 'Male',
     department: 'IT',
@@ -71,6 +74,7 @@ let employeesData = [
   },
   {
     id: 4,
+      age: 41,
     fullName: 'Black Smith',
     gender: 'Male',
     department: 'IT',
@@ -79,6 +83,7 @@ let employeesData = [
   },
   {
     id: 5,
+      age: 13,
     fullName: 'Jack Lee',
     gender: 'Male',
     department: 'Marketing',
@@ -87,6 +92,7 @@ let employeesData = [
   },
   {
     id: 6,
+      age: 22,
     fullName: 'Sottixon ',
     gender: 'Female',
     department: 'Marketing',
