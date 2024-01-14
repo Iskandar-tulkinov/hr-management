@@ -1861,6 +1861,18 @@ only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (        mi
     margin-right: 4rem;
   }
 
+  .md\:mr-20 {
+    margin-right: 5rem;
+  }
+
+  .md\:mr-2 {
+    margin-right: 0.5rem;
+  }
+
+  .md\:mr-24 {
+    margin-right: 6rem;
+  }
+
   .md\:flex {
     display: flex;
   }
