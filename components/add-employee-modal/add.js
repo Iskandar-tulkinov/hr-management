@@ -39,16 +39,9 @@ departmentOptions.forEach(function (option) {
 
 let gender;
 
-const genderElements = document.querySelectorAll("input[name='gender']");
-for (const element of genderElements) {
-  if (element.checked) {
-    gender = element.id;
-    console.log('gender is ' + gender);
-
-    break; // Exit the loop once a checked element is found
-  }
-}
-console.log('gender is ' + gender);
+const genderElements = Array.from(
+  document.querySelectorAll("input[name='gender']")
+);
 
 // Initial data
 let employeesData = [
@@ -239,6 +232,17 @@ function deleteDataModal(employeeId) {
 
 employeeForm.addEventListener('submit', (e) => {
   e.preventDefault();
+
+  console.log(genderElements);
+  for (const element of genderElements) {
+    if (element.checked) {
+      gender = element.id;
+      console.log('gender is ' + gender);
+
+      break; // Exit the loop once a checked element is found
+    }
+  }
+  console.log('gender is ' + gender);
 
   let newEmployeeDataObj = {
     id: employeesData.length + 1,
