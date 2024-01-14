@@ -37,7 +37,7 @@
          class="sideBar hidden   flex-col md:flex   w-full  max-w-full md:max-w-[20rem] text-gray-300 z-10">
 
          <div
-            class="dashboard hidden z-10 fixed  left-0 rounded-lg md:rounded-none   md:flex flex-col  md:justify-between    md:min-w-[240px] w-fit h-fit md:w-full  md:h-full  p-4 md:py-8 capitalize bg-gray-300 text-gray-800 duration-200">
+            class="dashboard hidden z-10  left-0 rounded-lg md:rounded-none   md:flex flex-col  md:justify-between    md:min-w-[240px] w-fit h-fit md:w-full  md:h-full  p-4 md:py-8 capitalize bg-gray-300 text-gray-800 duration-200">
             <ul class="flex flex-col text-3xl px-2">
                <li class="dashboardItem">
                   <a href="../../index.html"
@@ -56,7 +56,7 @@
                   </a>
                </li>
                <li class="dashboardItem">
-                  <button data-target="#EmployeeModal"
+                  <button onclick="openEmployeeModal()"
                      class="newEmployee flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start  hover:text-white hover:bg-red-600  focus:text-black focus:bg-red-500">
                      <span class="icon-user-plus text-2xl"></span>
                      Add Employee

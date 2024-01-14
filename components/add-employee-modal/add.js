@@ -15,6 +15,11 @@ const departmentList = document.querySelector(".departmentList");
 const downIcon = document.querySelector(".downIcon");
 const departmentOptions = document.querySelectorAll(".departmentOption");
 const newEmployeeBtn = document.querySelector(".newEmployee")
+let genderEl;
+const genderElements = Array.from(
+   document.querySelectorAll("input[name='gender']")
+ );
+
 let isEdit = false, editId;
 downIcon.addEventListener("click", (e) => {
    e.stopPropagation()
@@ -37,30 +42,24 @@ downIcon.addEventListener("click", (e) => {
     });
  });
 
-const genderElements = document.getElementsByName('gender');
-let genderEl;
-// for(let i= 0; i<genderElements.length;i++){
-//    if(genderElements[i].checked){
-//       genderEl=genderElements[i].value
-//       console.log("gender is innre "+genderEl);
-//    }
-// }
-// console.log("gender is "+genderEl);
+// Random ID Generation
+const generateRandomId = function (length) {
+   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   let randomId = '';
 
-genderElements.forEach((element) => {
-if(element.checked){
-   console.log(true)
-}else{
-   console.log('not checked');
-}
-      // genderEl = element;
-      // console.log("gender is " + genderEl);
+   for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      randomId += characters.charAt(randomIndex);
+   }
 
-});
+   return randomId;
+};
+const employeeID= generateRandomId(8)
+// Function to add a new employee
 
 // Initial data
 let employeesData = [
-   {
+   { id:1,
       fullName: "Johny Depp",
       gender: "Male",
       age: 34,
@@ -68,14 +67,14 @@ let employeesData = [
       position: "Chief Accountant",
       dateOfBirth: "01.10.1990",
    },
-   {
+   {id:2,
       fullName: "Sarah Jim",
       gender: "Female",
       age: 25,
       department: "Marketing",
       position: "Chief Marketolog",
       dateOfBirth:"21.01.1999",
-   },{
+   },{id:3,
       fullName: "Tom Jerry",
       gender: "Male",
       age: 26,
@@ -83,9 +82,8 @@ let employeesData = [
       position: "Data Scientist",
       dateOfBirth: "21.12.1998",
    },
-   {fullName:'Black Smith',gender:'Male',age:44,department:'IT',position:'Product Manager',dateOfBirth:"21.04.1980",},
-   {
-      fullName: "Casy Candy ",
+   {id:4, fullName:'Black Smith',gender:'Male',age:44,department:'IT',position:'Product Manager',dateOfBirth:"21.04.1980",},
+   {    id:5,   fullName: "Casy Candy ",
       gender: "Female",
       age: 29,
       department: "Marketing",
@@ -102,86 +100,85 @@ let employeesData = [
 function saveToLocalStorage() {
    localStorage.setItem("list", JSON.stringify(employeesData));
 }
+function showEmployeesData(currentPage) {
+   const itemsPerPage = 5;
+   const employeesData = JSON.parse(localStorage.getItem('list')) || [];
+   // Paginate the data
+   const paginatedData = paginateArray(employeesData, itemsPerPage, currentPage);
+   // Clear the table body
+   tableBody.innerHTML = '';
 
-newEmployeeBtn.addEventListener("click",()=>{
+   // Show the paginated data in the table
+   paginatedData.forEach((employee, index) => {
+      tableBody.innerHTML += `
+      <tr class="employeeDetails ${index % 2 === 0 ? "bg-slate-300":"bg-gray-400"} border border-[#696969]">
+                      <td class="px-4 py-2 border border-[#696969] ">${index+1}</td>
+                      <td class="px-4 py-2 border border-[#696969] capitalize">${employee.fullName}</td>
+                      <td class="px-4 py-2 border border-[#696969] capitalize">${employee.gender}</td>
+                      <td class="px-4 py-2 border border-[#696969]">${employee.age}</td>
+                      <td class="px-4 py-2 border border-[#696969]">${employee.department}</td>
+                      <td class="px-4 py-2 border border-[#696969] capitalize">${employee.position}</td>
+                      <td class="px-4 py-2 border border-[#696969]">${employee.dateOfBirth}</td>
+                      <td class="flex justify-center w-full h-full">
+    <button onclick="editData(${employee.id})" class="btn  py-3 px-1 w-fit h-fit flex justify-center items-center rounded-md duration-300 transition-all ease-linear hover:bg-yellow-300 cursor-pointer">
+    <img
+       src="../../assets/img/edit.svg"
+       alt="Edit icon"
+       width="30"
+       height="30" />
+  </button>
+  <button data-target="#deleteModal" onclick="deleteData(${employee.id})"
+  class="btn py-3 px-1 w-fit h-Fw-fit hover:bg-red-600 flex justify-center items-center rounded-md duration-300 transition-all ease-linear cursor-pointer">
+  <img
+     src="../../assets/img/delete.svg"
+     alt="Delete icon"
+     width="30"
+     height="30" />
+  </button>
+
+                      </td>
+                   </tr>
+      `;
+   });
+
+ }
+
+function openEmployeeModal() {
+   employeeModal.classList.remove('hidden');
+   overlay.classList.remove('hidden');
    submitBtn.innerText='Submit'
-   modalTitle.textContent="Add employee's data"
    document.body.classList.add('overflow-hidden');
-   employeeModal.classList.remove(`hidden`);
    employeeModal.classList.add("overflow-y-scroll")
-   overlay.classList.remove("hidden");
-   isEdit=false
-   employeeForm.reset()
-})
+   // isEdit=false
+   // employeeForm.reset()
+   //   employeeForm.reset();
+ }
 
+function editData(employeeID){
 
-
-// function showEmployeesData() {
-//    employeesData = JSON.parse(localStorage.getItem("list"));
-//    tableBody.innerHTML = "";
-//    employeesData.forEach((employee, index) => {
-//       tableBody.innerHTML += `
-//     <tr class="employeeDetails ${index % 2 === 0 ? "bg-slate-300":"bg-gray-400"} border border-[#696969]">
-//                     <td class="px-4 py-2 border border-[#696969] ">${index+1}</td>
-//                     <td class="px-4 py-2 border border-[#696969] capitalize">${employee.fullName}</td>
-//                     <td class="px-4 py-2 border border-[#696969] capitalize">${employee.gender}</td>
-//                     <td class="px-4 py-2 border border-[#696969]">${employee.age}</td>
-//                     <td class="px-4 py-2 border border-[#696969]">${employee.department}</td>
-//                     <td class="px-4 py-2 border border-[#696969] capitalize">${employee.position}</td>
-//                     <td class="px-4 py-2 border border-[#696969]">${employee.dateOfBirth}</td>
-//                     <td class="flex justify-center w-full h-full">
-//   <button onclick="editData(${index},${employee.fullName},${employee.gender},${employee.age},${employee.department},${employee.position},${employee.dateOfBirth})" class="btn editBtn py-3 px-1 w-fit h-fit flex justify-center items-center rounded-md duration-300 transition-all ease-linear hover:bg-yellow-300 cursor-pointer">
-//   <img
-//      src="../../assets/img/edit.svg"
-//      alt="Edit icon"
-//      width="30"
-//      height="30" />
-// </button>
-// <button data-target="#deleteModal" onclick="deleteData(${index})"
-// class="btn py-3 px-1 w-fit h-Fw-fit hover:bg-red-600 flex justify-center items-center rounded-md duration-300 transition-all ease-linear cursor-pointer">
-// <img
-//    src="../../assets/img/delete.svg"
-//    alt="Delete icon"
-//    width="30"
-//    height="30" />
-// </button>
-
-//                     </td>
-//                  </tr>
-//     `;
-
-//    });
-// }
-const editBtns= document.querySelectorAll(".editBtn")
-editBtns.forEach(editbtn=>{
-   editbtn.addEventListener('click',()=>{
-      document.body.classList.add('overflow-hidden');
-      employeeModal.classList.remove(`hidden`);
-      employeeModal.classList.add("overflow-y-scroll")
-      overlay.classList.remove("hidden");
-      console.log(employeesData);
-   })
-})
-function editData(index,employeeName,employeeGender,employeeAge,employeeDepartment,employeePosition,employeeDateOfBirth){
-
+   const employee = employeesData.find((employee) => employee.id === employeeID);
   isEdit=true;
-  editId=index;
-  name.value=employeeName;
-  genderEl.value=employeeGender;
-  age.value=employeeAge;
-  department.textContent=employeeDepartment;
-  position.value=employeePosition;
-  dateOfBirth.value=employeeDateOfBirth;
+editId = employee.id;
+name.value = employee.fullName;
+// Check the gender radio button that matches the employee's gender
+genderElements.forEach((element) => {
+  element.checked = element.id === employee.gender;
+});
+age.value = employee.age;
+department.textContent = employee.department;
+position.value = employee.position;
+const birthdayParts = employee.dateOfBirth.split('.'); // Assuming dateOfBirth is in 'DD.MM.YYYY' format
+const formattedDate = `${birthdayParts[2]}-${birthdayParts[1]}-${birthdayParts[0]}`;
+dateOfBirth.value = formattedDate;
 
-  submitBtn.textContent='Save changes';
-  modalTitle.textContent='Edit employees data'
-
-//   saveToLocalStorage()
-//   showEmployeesData()
+// Update the modal title
+modalTitle.textContent = 'Edit Employee Data';
+// Open the modal
+openEmployeeModal();
 }
 
+function deleteData(employeeID) {
 
-function deleteData(index) {
    document.getElementById('deleteModal').classList.remove('hidden');
    overlay.classList.remove('hidden');
    document.body.classList.add('overflow-hidden');
@@ -190,23 +187,25 @@ function deleteData(index) {
 
    // Define a function for the delete button click event
    function onDeleteBtnClick() {
-       employeesData.splice(index, 1);
+      employeesData = employeesData.filter(
+         (employee) => employee.id != employeeID
+       );
+      let  employee=employeesData.filter(employee=>employee.fullName)
        saveToLocalStorage();
-       showEmployeesData();
        closeModal();
-       showMessage(information.fullName, "'s data has been deleted!", 'bg-red-500');
+       showMessage(employee.fullName, "'s data has been deleted!", 'bg-red-500');
+       showEmployeesData();
       // location.reload()
        // Remove the event listener after it has been executed
        deleteBtn.removeEventListener('click', onDeleteBtnClick);
    }
-
    // Attach the event listener
    deleteBtn.addEventListener('click', onDeleteBtnClick);
 }
 
-//
 
 form.addEventListener("submit", (e) => {
+    // Get the selected gender
   for (const element of genderElements) {
     if (element.checked) {
       genderEl = element.id;
@@ -214,10 +213,9 @@ form.addEventListener("submit", (e) => {
       break; // Exit the loop once a checked element is found
     }
   }
-//   console.log('gender is ' + genderEl);
    e.preventDefault();
-
-   const information = {
+    const information = {
+      id: isEdit ? editId : employeeID,
       fullName: name.value,
       gender: genderEl,
       age: age.value,
@@ -225,15 +223,23 @@ form.addEventListener("submit", (e) => {
       position: position.value,
       dateOfBirth: dateOfBirth.value,
    };
+  // Check if it's an edit or add operation
+  console.log('isEdit', isEdit);
+  if (isEdit) {
+    // Edit an existing employee
+    employeesData = employeesData.map((employee) =>
+      employee.id === editId ? information : employee
+      );
+   saveToLocalStorage();
+   showEmployeesData();
 
-   if (!isEdit) {
-      employeesData.push(information);
-      showMessage(information.fullName,'data saved successfully!','bg-green-500')
-   } else {
-      isEdit = false;
-      employeesData[editId] = information;
-   }
+  } else {
+    // Add a new employee
+    employeesData.push(information);
+   saveToLocalStorage();
+   showEmployeesData();
 
+  }
 
    submitBtn.textContent='Submit'
    modalTitle.textContent = "Add new employee's data";
@@ -243,6 +249,7 @@ form.addEventListener("submit", (e) => {
 });
 
 
+//
 
 function showMessage(name,message,style){
    const  actionMessage =document.querySelector(".message")
@@ -290,15 +297,6 @@ function logout() {
 
  }
 
-// function refreshPageIfNeeded(employeesData) {
-//     if (employeesData.length === a * n || employeesData.length === b * n) {
-//         location.reload();
-//     }
-// }
-
-// refreshPageIfConditionMet(employeesData);
-
-
 // Pagination
 
 const paginationWrapper = document.querySelector(".paginationContainer");
@@ -327,50 +325,6 @@ function paginateArray(array, itemsPerPage, currentPage) {
    return paginatedItems;
  }
 
- function showEmployeesData(currentPage) {
-   const itemsPerPage = 5;
-
-   const employeesData = JSON.parse(localStorage.getItem('list')) || [];
-
-   // Paginate the data
-   const paginatedData = paginateArray(employeesData, itemsPerPage, currentPage);
-
-   // Clear the table body
-   tableBody.innerHTML = '';
-
-   // Show the paginated data in the table
-   paginatedData.forEach((employee, index) => {
-      tableBody.innerHTML += `
-      <tr class="employeeDetails ${index % 2 === 0 ? "bg-slate-300":"bg-gray-400"} border border-[#696969]">
-                      <td class="px-4 py-2 border border-[#696969] ">${index+1}</td>
-                      <td class="px-4 py-2 border border-[#696969] capitalize">${employee.fullName}</td>
-                      <td class="px-4 py-2 border border-[#696969] capitalize">${employee.gender}</td>
-                      <td class="px-4 py-2 border border-[#696969]">${employee.age}</td>
-                      <td class="px-4 py-2 border border-[#696969]">${employee.department}</td>
-                      <td class="px-4 py-2 border border-[#696969] capitalize">${employee.position}</td>
-                      <td class="px-4 py-2 border border-[#696969]">${employee.dateOfBirth}</td>
-                      <td class="flex justify-center w-full h-full">
-    <button onclick="editData(${index},${employee.fullName},${employee.gender},${employee.age},${employee.department},${employee.position},${employee.dateOfBirth})" class="btn  py-3 px-1 w-fit h-fit flex justify-center items-center rounded-md duration-300 transition-all ease-linear hover:bg-yellow-300 cursor-pointer">
-    <img
-       src="../../assets/img/edit.svg"
-       alt="Edit icon"
-       width="30"
-       height="30" />
-  </button>
-  <button data-target="#deleteModal" onclick="deleteData(${index})"
-  class="btn py-3 px-1 w-fit h-Fw-fit hover:bg-red-600 flex justify-center items-center rounded-md duration-300 transition-all ease-linear cursor-pointer">
-  <img
-     src="../../assets/img/delete.svg"
-     alt="Delete icon"
-     width="30"
-     height="30" />
-  </button>
-
-                      </td>
-                   </tr>
-      `;
-   });
- }
 
  function updatePaginationButtons(totalPages, currentPage) {
    const paginationContainer = document.querySelector('.paginationContainer');
