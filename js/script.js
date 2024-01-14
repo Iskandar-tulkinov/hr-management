@@ -13,13 +13,13 @@ const openDashboard = function (){
 //   })
 // });
 window.addEventListener('resize',()=>{
-  if (window.innerWidth > 768) {
+  if (window.innerWidth >= 768) {
     dashboard.classList.remove('fixed');
   }else{
     dashboard.classList.add("fixed")
   };
 })
-if (window.innerWidth > 768) {
+if (window.innerWidth >= 768) {
   dashboard.classList.remove('fixed');
 }else{
   dashboard.classList.add("fixed")

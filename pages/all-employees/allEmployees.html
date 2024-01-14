@@ -11,17 +11,17 @@
    <link rel="stylesheet" href="../../assets/css/output.css" />
 </head>
 
-<body class="w-full h-full relative">
+<body class="w-full h-[100vh] md:overflow-y-hidden relative">
    <div
-      class="message hidden fixed top-3 left-2/4  -translate-x-2/4 transition-transform duration-500 ease-linear   text-white p-4 mb-4 rounded-xl z-20">
+      class="message hidden fixed top-3 left-2/4  -translate-x-2/4 transition-transform duration-500 ease-linear   text-white p-4 mb-4 rounded-xl z-30">
    </div>
    <!-- Data has successfully updated!  bg-blue-500-->
    <!-- Data has been deleted!  bg-red-500 -->
 
 
-   <div class="flex flex-col md:flex md:flex-row w-full h-full">
+   <div class="flex flex-col  md:flex-row w-full h-full">
       <aside
-         class="md:fixed  flex-col md:flex float-left border-r border-gray-300 w-full  md:h-full md:max-w-[20rem] p-4 bg-gray-300 text-gray-300">
+         class="md:fixed  flex-col md:flex float-left border-r border-gray-300 w-full  md:h-full md:max-w-[20rem] p-4 bg-gray-300 text-gray-300 z-10">
          <div class="flex gap-4 items-center px-4 py-2">
             <button onclick="openDashboard()" class="sidebar-icon md:hidden active:scale-95">
                <span
@@ -33,7 +33,7 @@
             </a>
          </div>
          <div
-            class="dashboard hidden fixed  left-0 rounded-lg md:rounded-none   md:flex flex-col  md:justify-between    md:min-w-[240px] w-fit h-fit md:w-full  md:h-full  p-2 md:py-8 capitalize bg-gray-300 text-gray-800 duration-200">
+            class="dashboard hidden z-10 fixed  left-0 rounded-lg md:rounded-none   md:flex flex-col  md:justify-between    md:min-w-[240px] w-fit h-fit md:w-full  md:h-full  p-2 md:py-8 capitalize bg-gray-300 text-gray-800 duration-200">
             <ul class="flex flex-col text-3xl px-2">
                <li class="dashboardItem">
                   <a href="../../index.html"
@@ -72,37 +72,35 @@
          </div>
       </aside>
 
-      <main class="mt-10 flex flex-col md:ml-96 ">
+      <main class="mt-6  md:mx-auto md:mr-16 flex flex-col  items-end justify-start   w-full   gap-2  z-0">
 
-         <form class="flex justify-end mb-3">
+         <form class="flex justify-start mb-3 sticky left-1 ">
             <input
-               class="py-2 px-3 border-2 border-blue-600 rounded-lg focus:border-blue-500 shadow-sm ring-1 shadow-blue-400 outline-none capitalize font-medium"
+               class="py-2 px-3 border-2 border-blue-300 rounded-lg focus:border-blue-400 shadow-sm ring-1 shadow-blue-100 outline-none capitalize font-medium"
                type="text" name="search" id="search" placeholder="Search data...">
          </form>
 
-         <table class="border rounded-tl-lg rounded-tr-lg overflow-hidden  ">
-            <thead class="">
-               <tr class=" bg-slate-800 text-[#efefef] text-[18px] md:text-[28px]">
-                  <th class="px-5 py-2">No</th>
-                  <th class="px-5 py-2">Name</th>
-                  <th class="px-5 py-2">Gender</th>
-                  <th class="px-5 py-2">Age</th>
-                  <th class="px-5 py-2">Department</th>
-                  <th class="px-5 py-2">Position</th>
-                  <th class="px-5 py-2">Date of birth</th>
-                  <th class="px-5 py-2">Actions</th>
+         <table class="border rounded-tl-lg rounded-tr-lg ">
+            <thead class="border  border-[#696969] ">
+               <tr class="border bg-slate-800 text-[#efefef] text-[18px] md:text-[28px]">
+                  <th class="border border-[#696969] px-5 py-2">No</th>
+                  <th class="border border-[#696969] px-5 py-2">Name</th>
+                  <th class="border border-[#696969] px-5 py-2">Gender</th>
+                  <th class="border border-[#696969] px-5 py-2">Age</th>
+                  <th class="border border-[#696969] px-5 py-2">Department</th>
+                  <th class="border border-[#696969] px-5 py-2">Position</th>
+                  <th class="border border-[#696969] px-5 py-2">Date of birth</th>
+                  <th class="border border-[#696969] px-5 py-2">Actions</th>
 
             </thead>
 
-            <tbody id="tableBody" class=" mb-8 border rounded-bl-lg rounded-br-lg">
+            <tbody id="tableBody" class=" border rounded-bl-lg rounded-br-lg">
                <!-- Employee Table -->
 
             </tbody>
          </table>
-         <div class="pagination flex w-full justify-center gap-4 ">
-            <button class="border py-3 px-4  bg-slate-500">1</button>
-            <button class="border py-3 px-4  bg-slate-500">2</button>
-            <button class="border py-3 px-4  bg-slate-500">3</button>
+         <div class="paginationContainer    flex w-full justify-end gap-4 md:gap-8  md:fixed   md:bottom-8">
+
          </div>
 
 
@@ -112,7 +110,7 @@
    <div class="all-modals">
       <!-- Delete modal ----------->
       <div id="deleteModal"
-         class="modal hidden p-4 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white z-10 font-bold flex-col justify-between gap-8">
+         class="modal hidden p-4 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white z-30 font-bold flex-col justify-between gap-8">
          <p class="block md:pl-4 md:pb-8 md:pr-16 text-[18px] md:text-[24px]">
             Are you sure to delete ?
          </p>
@@ -129,7 +127,7 @@
       </div>
       <!------------ Lougout modal ------------>
       <div id="logoutModal"
-         class="modal hidden p-4 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white z-10 font-bold flex-col justify-between gap-8 h-[400px]">
+         class="modal hidden p-4 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white z-30 font-bold flex-col justify-between gap-8 ">
          <p class="block md:pl-4 md:pb-8 md:pr-16 text-[18px] md:text-[24px] text-center">
             Are you sure to
             <span class="text-red-700 text-[18px] md:text-[24px]">logout</span>
@@ -148,7 +146,7 @@
       </div>
       <!------ Add Employee modal  ----->
       <div  id="employeeModal"
-         class="modal  hidden flex-col absolute top-0 left-0 w-full md:w-fit h-full md:h-fit md:top-[50%] md:left-[50%] md:translate-x-[-50%] md:translate-y-[-50%] lg:top-[50%] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[-50%] bg-white z-10 md:rounded-xl md:overflow-y-auto">
+         class="modal  hidden flex-col absolute top-0 left-0 w-full md:w-fit h-full md:h-fit md:top-[50%] md:left-[50%] md:translate-x-[-50%] md:translate-y-[-50%] lg:top-[50%] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[-50%] bg-white z-30 md:rounded-xl md:overflow-y-auto">
          <div class="flex justify-between border-b-2 border-b-gray-400 p-6">
             <h2 class="modal__title text-[24px] font-bold">Add new Employee</h2>
             <button onclick="closeModal()"
@@ -258,7 +256,7 @@
       </div>
    </div>
    <!-- Overlay -->
-   <div onclick="closeModal()" id="overlay" class="hidden  absolute top-0  bottom-0 right-0 w-full h-full bg-black opacity-50">
+   <div onclick="closeModal()" id="overlay" class="hidden overflow-y-hidden z-20 absolute top-0  bottom-0 right-0 w-full h-full bg-black opacity-50">
    </div>
 
    <script>

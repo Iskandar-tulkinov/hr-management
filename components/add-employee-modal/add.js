@@ -114,7 +114,7 @@ newEmployeeBtn.addEventListener("click",()=>{
    employeeForm.reset()
 })
 
-if (employeesData.length) showEmployeesData();
+
 
 function showEmployeesData() {
    employeesData = JSON.parse(localStorage.getItem("list"));
@@ -205,7 +205,7 @@ function deleteData(index) {
        showEmployeesData();
        closeModal();
        showMessage(index, 'data has been deleted!', 'bg-red-500');
-
+      location.reload()
        // Remove the event listener after it has been executed
        deleteBtn.removeEventListener('click', onDeleteBtnClick);
    }
@@ -217,7 +217,7 @@ function deleteData(index) {
 //
 
 form.addEventListener("submit", (e) => {
-   e.preventDefault();
+   // e.preventDefault();
    const information = {
       fullName: name.value,
       gender: genderEl,
@@ -278,7 +278,7 @@ const logOutModal= document.getElementById("logoutModal")
 function logout() {
    document.body.innerHTML = '';
    let div = document.createElement('div');
-   div.setAttribute('class','w-full h-sceen flex flex-col justify-center items-center ')
+   div.setAttribute('class','w-full h-sceen flex flex-col justify-center items-center gap-8 mx-4 ')
    div.innerHTML = `
    <h2 class="m-auto  bg-black rounded-lg text-white py-5 px-8 text-[34px]">You have logged out. Refresh if you want to get data back</h2>
    <button id="refreshBtn" class="border rounded-lg py-4 px-5 bg-blue-500 text-2xl  text-white">Refresh Page</button>
@@ -291,30 +291,6 @@ function logout() {
 
  }
 
-
-
-// Pagination
-// tableBody-list
-// employeesData- list_item
-const pagination = document.querySelector(".pagination");
-let currentPage = 1;
-let rows = 5;
-let per5=1 ;
-per5*=rows;
-
-if(employeesData.length <= 5){
-   pagination.classList.toggle('hidden')
-}else{
-   // location.reload()
-   pagination.classList.remove("hidden")
-}
-
-let a = 1;
-let b = a + 1;
-a=a+1
-b=a+1
-const n = 5;
-
 // function refreshPageIfNeeded(employeesData) {
 //     if (employeesData.length === a * n || employeesData.length === b * n) {
 //         location.reload();
@@ -322,13 +298,105 @@ const n = 5;
 // }
 
 // refreshPageIfConditionMet(employeesData);
-// function displayTable(tableRows, wrapper, rowsPerPage, page) {
-//    // wrapper.innerHTML = "";
-//    page--;
 
-//    let loopStart = rowsPerPage * page;
-//    let paginatedItems = tableRows.slice(loopStart, loopStart + rowsPerPage);
-//    for (let i = loopStart; i < paginatedItems; i++) {}
-// }
 
-// displayTable(employeesData, tableBody, rows, currentPage);
+// Pagination
+// tableBody-list_element(table)
+// employeesData- list_item
+const paginationWrapper = document.querySelector(".paginationContainer");
+let currentPage = 1;
+let rows = 5;
+let per5=1 ;
+per5*=rows;
+
+if(tableBody.length <= 5){
+   paginationWrapper.classList.toggle('hidden')
+}else{
+   // location.reload()
+   paginationWrapper.classList.remove("hidden")
+}
+
+ // Example usage
+ const itemsPerPage = 5;
+//  let currentPage = 1;
+
+//  const employeesData = JSON.parse(localStorage.getItem('list')) || [];
+ const totalPages = Math.ceil(employeesData.length / itemsPerPage);
+
+function paginateArray(array, itemsPerPage, currentPage) {
+   const startIndex = (currentPage - 1) * itemsPerPage;
+   const endIndex = startIndex + itemsPerPage;
+   const paginatedItems = array.slice(startIndex, endIndex);
+
+   return paginatedItems;
+ }
+
+ function showEmployeesData(currentPage) {
+   const itemsPerPage = 5; // Set the number of items per page
+   // const tableBody = document.getElementById('tableBody');
+
+   // Retrieve data from localStorage
+   const employeesData = JSON.parse(localStorage.getItem('list')) || [];
+
+   // Paginate the data
+   const paginatedData = paginateArray(employeesData, itemsPerPage, currentPage);
+
+   // Clear the table body
+   tableBody.innerHTML = '';
+
+   // Show the paginated data in the table
+   paginatedData.forEach((employee, index) => {
+      tableBody.innerHTML += `
+      <tr class="employeeDetails ${index % 2 === 0 ? "bg-slate-300":"bg-gray-400"} border border-[#696969]">
+                      <td class="px-4 py-2 border border-[#696969] ">${index+1}</td>
+                      <td class="px-4 py-2 border border-[#696969] capitalize">${employee.fullName}</td>
+                      <td class="px-4 py-2 border border-[#696969] capitalize">${employee.gender}</td>
+                      <td class="px-4 py-2 border border-[#696969]">${employee.age}</td>
+                      <td class="px-4 py-2 border border-[#696969]">${employee.department}</td>
+                      <td class="px-4 py-2 border border-[#696969] capitalize">${employee.position}</td>
+                      <td class="px-4 py-2 border border-[#696969]">${employee.dateOfBirth}</td>
+                      <td class="flex justify-center w-full h-full">
+    <button onclick="editData(${index},${employee.fullName},${employee.gender},${employee.age},${employee.department},${employee.position},${employee.dateOfBirth})" class="btn  py-3 px-1 w-fit h-fit flex justify-center items-center rounded-md duration-300 transition-all ease-linear hover:bg-yellow-300 cursor-pointer">
+    <img
+       src="../../assets/img/edit.svg"
+       alt="Edit icon"
+       width="30"
+       height="30" />
+  </button>
+  <button data-target="#deleteModal" onclick="deleteData(${index})"
+  class="btn py-3 px-1 w-fit h-Fw-fit hover:bg-red-600 flex justify-center items-center rounded-md duration-300 transition-all ease-linear cursor-pointer">
+  <img
+     src="../../assets/img/delete.svg"
+     alt="Delete icon"
+     width="30"
+     height="30" />
+  </button>
+
+                      </td>
+                   </tr>
+      `;
+   });
+ }
+
+ function updatePaginationButtons(totalPages, currentPage) {
+   const paginationContainer = document.querySelector('.paginationContainer');
+   paginationContainer.innerHTML = '';
+
+   for (let i = 1; i <= totalPages; i++) {
+     const button = document.createElement('button');
+     button.innerText = i;
+     button.className = i === currentPage
+     ? 'rounded-md bg-green-500 text-white text-2xl font-bold py-4 px-5 hover:opacity-80 active:scale-95 transition-all duration-300 ease-linear' :
+          'rounded-md bg-blue-500  text-white text-2xl font-bold py-4 px-5 hover:opacity-80 active:scale-95 transition-all duration-300 ease-linear';
+     button.addEventListener('click', () => {
+       currentPage = i;
+       updatePaginationButtons(totalPages, currentPage);
+       showEmployeesData(currentPage); // Update the table content when a page button is clicked
+     });
+
+     paginationContainer.appendChild(button);
+   }
+ }
+
+ updatePaginationButtons(totalPages, currentPage);
+ if (employeesData.length) showEmployeesData(currentPage);
