@@ -101,10 +101,10 @@ function saveToLocalStorage() {
    localStorage.setItem("list", JSON.stringify(employeesData));
 }
 function showEmployeesData(currentPage) {
-   const itemsPerPage = 5;
+   const rowsPerPage = 5;
    const employeesData = JSON.parse(localStorage.getItem('list')) || [];
    // Paginate the data
-   const paginatedData = paginateArray(employeesData, itemsPerPage, currentPage);
+   const paginatedData = paginateArray(employeesData, rowsPerPage, currentPage);
    // Clear the table body
    tableBody.innerHTML = '';
 
@@ -112,7 +112,7 @@ function showEmployeesData(currentPage) {
    paginatedData.forEach((employee, index) => {
       tableBody.innerHTML += `
       <tr class="employeeDetails ${index % 2 === 0 ? "bg-slate-300":"bg-gray-400"} border border-[#696969]">
-                      <td class="px-4 py-2 border border-[#696969] ">${index+1}</td>
+                      <td class="px-4 py-2 border border-[#696969] ">${index+1+(currentPage-1)*rowsPerPage}</td>
                       <td class="px-4 py-2 border border-[#696969] capitalize">${employee.fullName}</td>
                       <td class="px-4 py-2 border border-[#696969] capitalize">${employee.gender}</td>
                       <td class="px-4 py-2 border border-[#696969]">${employee.age}</td>
@@ -149,9 +149,7 @@ function openEmployeeModal() {
    submitBtn.innerText='Submit'
    document.body.classList.add('overflow-hidden');
    employeeModal.classList.add("overflow-y-scroll")
-   // isEdit=false
    // employeeForm.reset()
-   //   employeeForm.reset();
  }
 
 function editData(employeeID){
@@ -178,11 +176,9 @@ openEmployeeModal();
 }
 
 function deleteData(employeeID) {
-
    document.getElementById('deleteModal').classList.remove('hidden');
    overlay.classList.remove('hidden');
    document.body.classList.add('overflow-hidden');
-
    const deleteBtn = document.querySelector(".deleteBtn");
 
    // Define a function for the delete button click event
@@ -195,7 +191,6 @@ function deleteData(employeeID) {
        closeModal();
        showMessage(employee.fullName, "'s data has been deleted!", 'bg-red-500');
        showEmployeesData(currentPage);
-      // location.reload()
        // Remove the event listener after it has been executed
        deleteBtn.removeEventListener('click', onDeleteBtnClick);
    }
@@ -203,8 +198,8 @@ function deleteData(employeeID) {
    deleteBtn.addEventListener('click', onDeleteBtnClick);
 }
 
-
 form.addEventListener("submit", (e) => {
+   // e.preventDefault();
     // Get the selected gender
   for (const element of genderElements) {
     if (element.checked) {
@@ -213,7 +208,6 @@ form.addEventListener("submit", (e) => {
       break; // Exit the loop once a checked element is found
     }
   }
-   e.preventDefault();
     const information = {
       id: isEdit ? editId : generateRandomId(8),
       fullName: name.value,
@@ -243,9 +237,7 @@ form.addEventListener("submit", (e) => {
    closeModal();
 });
 
-
 //
-
 function showMessage(name,message,style){
    const  actionMessage =document.querySelector(".message")
    setTimeout(()=>{
@@ -274,55 +266,30 @@ function closeModal(){
    document.body.classList.remove('overflow-hidden');
 }
 
-const logOutModal= document.getElementById("logoutModal")
-
-function logout() {
-   document.body.innerHTML = '';
-   let div = document.createElement('div');
-   div.setAttribute('class','w-full h-sceen flex flex-col justify-center items-center gap-8 mx-4 ')
-   div.innerHTML = `
-   <h2 class="m-auto  bg-black rounded-lg text-white py-5 px-8 text-[34px]">You have logged out. Refresh if you want to get data back</h2>
-   <button id="refreshBtn" class="border rounded-lg py-4 px-5 bg-blue-500 text-2xl  text-white">Refresh Page</button>
-
-   `;
-   document.body.appendChild(div);
-   document.getElementById('refreshBtn').addEventListener('click', function() {
-      location.reload();
-  });
-
- }
-
-// Pagination
-
-const paginationWrapper = document.querySelector(".paginationContainer");
+//  Pagination
+const paginationContainer = document.querySelector(".paginationContainer");
 let currentPage = 1;
 let rows = 5;
-let per5=1 ;
-per5*=rows;
-
 if(employeesData.length <= 5){
-   paginationWrapper.classList.toggle('hidden')
+   paginationContainer.classList.toggle('hidden')
 }else{
-   // location.reload()
-   paginationWrapper.classList.remove("hidden")
+   paginationContainer.classList.remove("hidden")
 }
  // Example usage
- const itemsPerPage = 5;
+ const rowsPerPage = 5;
 
 //  const employeesData = JSON.parse(localStorage.getItem('list')) || [];
- const totalPages = Math.ceil(employeesData.length / itemsPerPage);
+ const totalPages = Math.ceil(employeesData.length / rowsPerPage);
 
-function paginateArray(array, itemsPerPage, currentPage) {
-   const startIndex = (currentPage - 1) * itemsPerPage;
-   const endIndex = startIndex + itemsPerPage;
+function paginateArray(array, rowsPerPage, currentPage) {
+   const startIndex = (currentPage - 1) * rowsPerPage;
+   const endIndex = startIndex + rowsPerPage;
    const paginatedItems = array.slice(startIndex, endIndex);
 
    return paginatedItems;
  }
 
-
  function updatePaginationButtons(totalPages, currentPage) {
-   const paginationContainer = document.querySelector('.paginationContainer');
    paginationContainer.innerHTML = '';
 
    for (let i = 1; i <= totalPages; i++) {
@@ -344,11 +311,9 @@ function paginateArray(array, itemsPerPage, currentPage) {
  updatePaginationButtons(totalPages, currentPage);
  if (employeesData.length) showEmployeesData(currentPage);
 
-
  // search validation
  const searchInput= document.getElementById("search");
 
- //  searchInputValue.length>0? tableBody.innerHTML='':tableBody;
  searchInput.addEventListener("input",handSearchInput)
  function handSearchInput(){
    const searchInputValue=searchInput.value.trim().toLowerCase();
@@ -358,18 +323,23 @@ function paginateArray(array, itemsPerPage, currentPage) {
 function getMatchingValue (searchInputValue) {
    const matches=[];
    // FilterName
-
-
 }
-//  function searchByName(inputValue){
-//    employeesData.forEach(employee=>{
-//       if(employee.fullName.toLowerCase().includes(inputValue.toLowerCase()))
 
-//    }
-//    )
-//     const   searchedName=employeesData.filter(data=>data.fullName.toLowerCase().icludes(inputValue.toLowerCase()))
-//     tableBody.innerHTML=''
-//     return searchedName;
-//  }
-//  searchByName(searchInputValue)
-//  log
+// Logout
+const logOutModal= document.getElementById("logoutModal");
+
+function logout() {
+   document.body.innerHTML = '';
+   let div = document.createElement('div');
+   div.setAttribute('class','w-full h-sceen flex flex-col justify-center items-center gap-8 mx-4 ')
+   div.innerHTML = `
+   <h2 class="m-auto  bg-black rounded-lg text-white py-5 px-8 text-[34px]">You have logged out. Refresh if you want to get data back</h2>
+   <button id="refreshBtn" class="border rounded-lg py-4 px-5 bg-blue-500 text-2xl  text-white">Refresh Page</button>
+
+   `;
+   document.body.appendChild(div);
+   document.getElementById('refreshBtn').addEventListener('click', function() {
+      location.reload();
+  });
+
+ }

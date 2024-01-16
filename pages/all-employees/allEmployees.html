@@ -21,7 +21,7 @@
 
    <div class="flex flex-col   w-full h-full">
       <header class="flex gap-4  items-center px-8 bg-gray-300 duration-500 transition-all ease-linear">
-         <button onclick="openDashboard()" class="sidebar-icon md:hidden active:scale-95">
+         <button onclick="openSidebar()" class="sidebar-icon md:hidden active:scale-95">
             <span
                class="icon-list text-center text-2xl text-black font-bold p-3 w-8 h-8 cursor-pointer rounded-lg hover:text-red-500 hover:bg-gray-300 hover:scale-110 duration-250 ease-in transition-all"></span>
          </button>
@@ -34,61 +34,54 @@
 
       <main class="flex  w-full h-full">
          <aside
-         class="sideBar hidden   flex-col md:flex   w-full  max-w-full md:max-w-[20rem] text-gray-300 z-10">
-
-         <div
-            class="dashboard hidden z-10  left-0 rounded-lg md:rounded-none   md:flex flex-col  md:justify-between    md:min-w-[240px] w-fit h-fit md:w-full  md:h-full  p-4 md:py-8 capitalize bg-gray-300 text-gray-800 duration-200">
+         class="sideBar hidden   md:flex  left-0  md:rounded-none flex-col  md:justify-between    h-full  md:py-8 capitalize bg-gray-300 text-gray-800 duration-200 z-10">
             <ul class="flex flex-col text-3xl px-2">
-               <li class="dashboardItem">
-                  <a href="../../index.html"
+               <li class="sidebarItem">
+                  <a href="../../index.html" title="Dashboard"
                      class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start hover:text-white hover:bg-red-600   focus:text-sky-50"
                      id="home" ">
                         <span class=" icon-home text-2xl"></span>
-                     Home
                   </a>
                </li>
-               <li class="dashboardItem">
-                  <a href="allEmployees.html"
+               <li class="sidebarItem">
+                  <a href="allEmployees.html" title="Table"
                      class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start bg-red-800 text-white hover:text-gray-200 hover:bg-red-500 focus:text-sky-50"
                      id="table" role="button">
                      <span class="icon-table2 text-2xl"></span>
-                     Table
+
                   </a>
                </li>
-               <li class="dashboardItem">
-                  <button onclick="openEmployeeModal()"
+               <li class="sidebarItem">
+                  <button onclick="openEmployeeModal()" title="Add Employee"
                      class="newEmployee flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start  hover:text-white hover:bg-red-600  focus:text-black focus:bg-red-500">
                      <span class="icon-user-plus text-2xl"></span>
-                     Add Employee
                   </button>
                </li>
             </ul>
-
-            <ul>
-               <li class="dashboardItem">
-                  <button data-target="#logoutModal"
-                     class="flex items-center text-xl w-full p-3 pr-5 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start  hover:text-white hover:bg-red-600  focus:text-black focus:bg-red-500">
+            <ul class="mx-3">
+               <li class="sidebarItem">
+                  <button data-target="#logoutModal" title="Lougout"
+                     class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start hover:text-gray-200 hover:bg-red-500 focus:text-sky-50">
                      <span class="icon-log-out text-2xl "></span>
-                     Log Out
+
                   </button>
                </li>
-               <li class="dashboardItem">
-                  <button
-                     class="closeSidebar flex items-center text-xl w-full p-3 pr-5 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start  hover:text-white hover:bg-red-600  focus:text-black focus:bg-red-500">
-
-                     Close Sidabar
+               <li class="sidebarItem">
+                  <button title="Close sideBar" onclick="closeSidebar()"
+                     class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start hover:text-gray-200 hover:bg-red-500 focus:text-sky-50">
+                     <img class="text-[#828FA3] hover:-white" src="../../assets/img/eye-off.svg" alt="">
                   </button>
                </li>
             </ul>
-         </div>
       </aside>
-         <section class="mt-6 pr-4 md:mx-auto  flex flex-col items-end  justify-start h-full w-full gap-2 z-0 overflow-x-auto">
+         <section class="mt-6 pr-4 px-3 md:mx-auto  flex flex-col  justify-start h-full w-full gap-2 z-0 ">
+            <div class=" text-xl md:text-2xl text-gray-700 font-bold px-3 capitalize">Controll all of your data with <span  class="text-2xl md:text-3xl text-red-700 font-sans">simplicity</span></div>
             <form class="flex justify-end mb-3 sticky left-1 ">
                <input
                   class="py-2 px-3 border-2 border-blue-300 rounded-lg focus:border-blue-400 shadow-sm ring-1 shadow-blue-100 outline-none capitalize font-medium"
                   type="text" name="search" id="search" placeholder="Search by name...">
             </form>
-            <table class="border rounded-tl-lg rounded-tr-lg   ">
+            <table class="border rounded-tl-lg rounded-tr-lg  overflow-x-scroll ">
                <thead class="border  border-[#696969] ">
                   <tr class="border bg-slate-800 text-[#efefef] text-[18px] md:text-[28px]">
                      <th class="border border-[#696969] px-5 py-2">No</th>
@@ -111,8 +104,8 @@
 
       </main>
    </div>
-   <div class="openSidebar hidden md:block capitalize absolute left-3 bottom-3 bg-gray-300 py-3 px-4 rounded-lg  hover:bg-red-500 text-2xl hover:text-white active:scale-95 cursor-pointer duration-500 transition-all ease-linear">
-Open sidebar
+   <div onclick="openSidebar()" class="openSideBarBtn translate-x-[-100%] capitalize absolute  bottom-3 bg-gray-300 py-3 px-4 rounded-tr-lg rounded-br-lg  hover:bg-red-500 text-2xl hover:text-white active:scale-95 cursor-pointer duration-500 transition-all ease-linear">
+<img src="../../assets/img/eye-on.svg" alt="Open sideBar">
    </div>
    <div class="all-modals">
       <!-- Delete modal ----------->
