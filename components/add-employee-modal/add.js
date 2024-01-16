@@ -311,22 +311,68 @@ function paginateArray(array, rowsPerPage, currentPage) {
  updatePaginationButtons(totalPages, currentPage);
  if (employeesData.length) showEmployeesData(currentPage);
 
+
+
+  // Debounce function
+function debounce(func, delay) {
+   let timeoutId;
+   return function () {
+     const context = this;
+     const args = arguments;
+     clearTimeout(timeoutId);
+     timeoutId = setTimeout(() => {
+       func.apply(context, args);
+     }, delay);
+   };
+ }
+ // Updated search input event listener with debounce
  // search validation
  const searchInput= document.getElementById("search");
+ searchInput.addEventListener("input", debounce(handleSearchInput, 500));
 
- searchInput.addEventListener("input",handSearchInput)
- function handSearchInput(){
-   const searchInputValue=searchInput.value.trim().toLowerCase();
-   const matches=getMatchingValue(searchInputValue);
-   displaySearchResult(matches);
+function handleSearchInput() {
+  const searchInputValue = searchInput.value.trim().toLowerCase();
+  const matches = getMatchingValue(searchInputValue);
+  displaySearchResult(matches);
 }
-function getMatchingValue (searchInputValue) {
-   const matches=[];
-   // FilterName
-}
+function getMatchingValue(searchInputValue) {
+   return employeesData.filter((employee) =>
+     employee.fullName.toLowerCase().includes(searchInputValue)
+   );
+ }
+
+ function displaySearchResult(matches) {
+   // Clear the table body
+   tableBody.innerHTML = '';
+
+   // Show the search result in the table
+   matches.forEach((employee, index) => {
+     tableBody.innerHTML += `
+       <tr class="employeeDetails ${index % 2 === 0 ? "bg-slate-300" : "bg-gray-400"} border border-[#696969]">
+         <td class="px-4 py-2 border border-[#696969] ">${index + 1}</td>
+         <td class="px-4 py-2 border border-[#696969] capitalize">${employee.fullName}</td>
+         <td class="px-4 py-2 border border-[#696969] capitalize">${employee.gender}</td>
+         <td class="px-4 py-2 border border-[#696969]">${employee.age}</td>
+         <td class="px-4 py-2 border border-[#696969]">${employee.department}</td>
+         <td class="px-4 py-2 border border-[#696969] capitalize">${employee.position}</td>
+         <td class="px-4 py-2 border border-[#696969]">${employee.dateOfBirth}</td>
+         <td class="flex justify-center w-full h-full">
+           <button onclick="editData(${employee.id})" class="btn  py-3 px-1 w-fit h-fit flex justify-center items-center rounded-md duration-300 transition-all ease-linear hover:bg-yellow-300 cursor-pointer">
+             <img src="../../assets/img/edit.svg" alt="Edit icon" width="30" height="30" />
+           </button>
+           <button data-target="#deleteModal" onclick="deleteData(${employee.id})"
+             class="btn py-3 px-1 w-fit h-Fw-fit hover:bg-red-600 flex justify-center items-center rounded-md duration-300 transition-all ease-linear cursor-pointer">
+             <img src="../../assets/img/delete.svg" alt="Delete icon" width="30" height="30" />
+           </button>
+         </td>
+       </tr>
+     `;
+   });
+ }
+
+
 
 // Logout
-const logOutModal= document.getElementById("logoutModal");
 
 function logout() {
    document.body.innerHTML = '';
@@ -343,3 +389,5 @@ function logout() {
   });
 
  }
+
+ 
