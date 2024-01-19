@@ -63,32 +63,28 @@
                   </li>
                </ul>
          </aside>
-            <section class="flex flex-wrap p-4 gap-x-5 gap-y-2 w-full h-full">
-               <div
-                  class="border-[2px] border-gray-700 p-4 rounded-[10px] h-[150px] w-[240px] flex flex-col items-center gap-2">
-                  <h2 class="text-red-800 text-[24px] font-bold">
-                     Total Employees
-                  </h2>
-                  <p class="totalEmployees text-[36px] font-bold">0</p>
-               </div>
-               <div
-                  class="border-[2px] border-gray-700 p-4 rounded-[10px] h-[150px] w-[240px] flex flex-col items-center gap-2">
-                  <h2 class="text-red-800 text-[24px] font-bold">
-                     Male Employees
-                  </h2>
-                  <p class="maleEmployees text-[36px] font-bold">0</p>
+            <section class="flex flex-col  p-4 gap-4 w-full h-full bg-gray-150">
+               <div class="flex  w-full justify-evenly h-fit gap-4">
+                  <div
+                     class="border-[2px] border-gray-300 p-12 rounded-[10px]  h-fit flex justify-center items-center gap-2 bg-white hover:shadow-xl hover:bg-violet-300 shadow-black hover:translate-y-[-1%] duration-200 transition-all ease-linear">
+                     <span class="icon-users text-red-800 text-[48px] font-bold"></span>
+                     <p class="totalEmployees text-[50px] font-bold">0</p>
+                  </div>
+                  <div
+                     class=" border-[2px] border-gray-700 rounded-[10px] p-12 flex  h-fit   items-center justify-center gap-2  hover:shadow-xl shadow-black hover:translate-y-[-1%] duration-200 transition-all ease-linear">
+                     <span class="icon-man text-[48px]  text-red-800  font-medium"></span>
+                     <p class="maleEmployees text-[50px] font-bold">0</p>
+                  </div>
+                  <div
+                     class="border-[2px] border-gray-700 rounded-[10px] h-fit p-12  flex justify-center items-center gap-2  hover:shadow-xl shadow-black hover:translate-y-[-1%] duration-200 transition-all ease-linear">
+                     <span class="icon-woman text-[48px] text-red-800 font-medium "></span>
+                     <p class="femaleEmployees text-[50px] font-bold">0</p>
+                  </div>
                </div>
 
                <div
-                  class="border-[2px] border-gray-700 p-4 rounded-[10px] h-[150px] w-[240px] flex flex-col items-center gap-2">
-                  <h2 class="text-red-800 text-[24px] font-bold text-center">
-                     Female Employees
-                  </h2>
-                  <p class="femaleEmployees text-[36px] font-bold">0</p>
-               </div>
-               <div
-               class="border-[2px] border-gray-700 p-4 rounded-[10px]  flex flex-col items-start gap-2">
-               <h2 class="text-red-800 text-[24px] font-bold text-center h-fit">
+               class="border-[2px] border-gray-700 p-4 rounded-[10px] h-fit w-fit  flex flex-col items-start gap-2  hover:shadow-xl shadow-black hover:translate-y-[-1%] duration-200 transition-all ease-linear">
+               <h2 class="text-red-800 text-[24px] font-bold text-center h-fit ">
                   Number of employees in each department
                </h2>
                <p class="accountingEmployees text-[24px] font-bold">Accounting: 0</p>
@@ -106,18 +102,13 @@
       <!-- Overlay -->
       <div
          onclick="closeModal()"
-         id="overlay"
-         class="hidden absolute top-0 left-0 w-full h-full bg-black opacity-50">
+
+         class="overlay hidden absolute top-0 left-0 w-full h-full bg-black opacity-50">
       </div>
 
-      <script src="./js/data.js"></script>
-      <!-- <script src="./pages/all-employees/allEmployees.js"></script> -->
-      <script src="./js/script.js"></script>
-      <!-- <script src="./components/modals-data/modal-content.js"></script> -->
+      <!-- <script src="./js/data.js"></script> -->
       <script src="./components/modals-data/modal-controller.js"></script>
-      <!-- <script src="./components/edit-modal/edit.js"></script> -->
-      <!-- <script src="./components/delete-modal/delete.js"></script> -->
-      <script src="./components/logout-modal/logout.js"></script>
-      <script src="./components/add-employee-modal/add.js"></script>
+      <script type="module" src="./components/modals-data/modal-content.js" ></script>
+      <script src="./js/script.js" type="module"></script>
    </body>
 </html>
