@@ -1,31 +1,26 @@
 "use sctict";
-import { allModals } from "../components/modals-data/modal-content.js";
-console.log(typeof allModals);
+
+import { addEditModal, deleteModal,logoutModal } from "../components/modals-data/modal-content.js";
+document.body.prepend(addEditModal)
+document.body.prepend(deleteModal)
+document.body.prepend(logoutModal)
 import { employeesData } from "./data.js";
-// import { openModal, closeModal } from "../components/modals-data/modal-controller.js";
-// console.log(employeesData);
-const sideBars= document.querySelectorAll(".sideBar")
-const openSideBarBtns= document.querySelectorAll(".openSideBarBtn")
+import { statistics } from "./data.js";
+
+const sideBar= document.querySelector(".sideBar")
+const openSideBarBtn= document.querySelector(".openSideBarBtn")
 function openSidebar (){
-sideBars.forEach(sideBar=>{
   sideBar.classList.remove("hidden","md:hidden" ,'translate-x-[-100%]')
   sideBar.classList.add('md:h-full')
-
-})
-openSideBarBtns.forEach(btn=>{
-  btn.classList.add('translate-x-[-100%]')
- } )
+openSideBarBtn.classList.add('translate-x-[-100%]')
 
 }
 
 function closeSidebar(){
-sideBars.forEach(sideBar=>{
   sideBar.classList.add('hidden','md:hidden','translate-x-[-100%')
   sideBar.classList.remove('md:h-full');
-})
-openSideBarBtns.forEach(btn=>{
-btn.classList.remove('translate-x-[-100%]')
-})
+openSideBarBtn.classList.remove('translate-x-[-100%]')
+}
 
 //
 
@@ -144,19 +139,19 @@ function showEmployeesData(currentPage) {
    submitBtn.innerText='Submit'
    document.body.classList.add('overflow-hidden');
    employeeModal.classList.add("overflow-y-scroll")
-   // employeeForm.reset()
+   employeeForm.reset()
    openModal()
  }
  let isEdit = false, editId;
-function editData(employeeID){
 
-   const employee = employeesData.find((employee) =>
-   {return  +employee.id == +employeeID});
+function editData(employeeID){
+   const employee = employeesData.find(employee=>{
+    return +employee.id == +employeeID
+   })
    console.log(employee);
   isEdit=true;
 editId = employee.id;
 name.value = employee.fullName;
-// Check the gender radio button that matches the employee's gender
 genderElements.forEach((element) => {
   element.checked = element.id === employee.gender;
 });
@@ -172,7 +167,6 @@ modalTitle.textContent = 'Edit Employee Data';
 // Open the modal
 openEmployeeModal();
 }
-
 function deleteData(employeeID) {
    document.getElementById('deleteModal').classList.remove('hidden');
    overlay.classList.remove('hidden');
@@ -197,7 +191,7 @@ function deleteData(employeeID) {
 }
 
 form.addEventListener("submit", (e) => {
-   // e.preventDefault();
+   e.preventDefault();
     // Get the selected gender
   for (const element of genderElements) {
     if (element.checked) {
@@ -301,7 +295,13 @@ function paginateArray(array, rowsPerPage, currentPage) {
  }
 
  updatePaginationButtons(totalPages, currentPage);
- if (employeesData.length) showEmployeesData(currentPage);
+
+ if (employeesData.length){
+  showEmployeesData(currentPage)
+}else{
+tableBody.innerHTML`
+ <tr><td colspan="8" class="text-center text-xl bg-slate-200">No data found</td></tr>
+ `};
 
 
 
@@ -320,13 +320,26 @@ function debounce(func, delay) {
  // Updated search input event listener with debounce
  // search validation
  const searchInput= document.getElementById("search");
+ const clearSearchInputBtn= document.querySelector(".clearSearchInputBtn")
+ clearSearchInputBtn.addEventListener('click',(e)=>{
+  e.preventDefault();
+  searchInput.value = ''
+  handleSearchInput()
+ })
  searchInput.addEventListener("input", debounce(handleSearchInput, 500));
 
 function handleSearchInput() {
   const searchInputValue = searchInput.value.trim().toLowerCase();
-
   const matches = getMatchingValue(searchInputValue);
-  displaySearchResult(matches);
+  if(matches.length > 0) {
+    displaySearchResult(matches);
+  }else{
+    tableBody.innerHTML =  `
+     <tr><td colspan="8" class="text-center text-xl bg-slate-200">No data found</td></tr>
+    `;
+    paginationContainer.innerHTML = '';
+  }
+//
 }
 function getMatchingValue(searchInputValue) {
    return employeesData.filter((employee) =>
@@ -362,11 +375,6 @@ function getMatchingValue(searchInputValue) {
      `;
    });
  }
-
-
-
-// Logout
-
 function logout() {
    document.body.innerHTML = '';
    let div = document.createElement('div');
@@ -382,5 +390,3 @@ function logout() {
   });
 
  }
-
-//

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full w-full">
 
 <head>
    <meta charset="UTF-8" />
@@ -11,7 +11,7 @@
    <link rel="stylesheet" href="../../assets/css/output.css" />
 </head>
 
-<body class="w-full h-[100vh] md:overflow-y-hidden relative">
+<body class="w-full h-full  relative">
    <div
       class="message hidden fixed top-3 left-2/4  -translate-x-2/4 transition-transform duration-500 ease-linear   text-white p-4 mb-4 rounded-xl z-30">
    </div>
@@ -34,8 +34,8 @@
 
       <main class="flex  w-full h-full">
          <aside
-         class="sideBar hidden   md:flex  left-0  md:rounded-none flex-col  md:justify-between    h-full  md:py-8 capitalize bg-gray-300 text-gray-800 duration-200 z-10">
-            <ul class="flex flex-col text-3xl px-2">
+         class="sideBar hidden h-full  md:flex  left-0  md:rounded-none flex-col  md:justify-between      md:py-8 capitalize bg-gray-300 text-gray-800 duration-200 z-10">
+            <ul class="flex flex-col text-3xl px-2 h-full">
                <li class="sidebarItem">
                   <a href="../../index.html" title="Dashboard"
                      class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all duration-300 ease-linear rounded-lg outline-none text-start  hover:text-white hover:bg-red-600   focus:text-sky-50"
@@ -76,10 +76,25 @@
       </aside>
          <section class="mt-6 pr-4 px-3 md:mx-auto  flex flex-col  justify-start h-full w-full gap-2 z-0 ">
             <div class=" text-xl md:text-2xl text-gray-700 font-bold px-3 capitalize">Controll all of your data with <span  class="text-2xl md:text-3xl text-red-700 font-sans">simplicity</span></div>
-            <form class="flex justify-end mb-3 sticky left-1 ">
-               <input
-                  class="py-2 px-3 border-2 border-blue-300 rounded-lg focus:border-blue-400 shadow-sm ring-1 shadow-blue-100 outline-none capitalize font-medium"
-                  type="text" name="search" id="search" placeholder="Search by name...">
+            <form class="flex flex-wrap justify-start items-center gap-2 md:gap-4 mb-3 sticky">
+               <div  class="relative w-fit h-fit ">
+
+                     <input
+                  class="py-1 px-2 pr-5 rounded-lg focus:border-blue-300 shadow-sm ring-1 shadow-blue-200 outline-none capitalize font-medium"
+                  type="text" name="search" id="search" placeholder="Search by name..."   >
+                  <button title="Clear input" role="button" class=" clearSearchInputBtn absolute top-1/2 -translate-y-1/2 right-1 w-[20px] h-[20px] hover:bg-red-500 duration-100 transition-all ease-linear rounded-md cursor-pointer active:scale-90 ">
+                     <img class=""  src="../../assets/img/close.svg" alt="Clear search" width="20" height="20">
+                  </button>
+            </div>
+                  <div class="flex gap-4 rounded-lg py-1 px-3">
+                     <label for="SearchedMale" class="text-xl  font-medium">Male
+                        <input type="radio" name="byGender" id="SearchedMale" class="seearchByGender" value="female">
+                     </label>
+                     <label for="SearchedFemale" class="text-xl  font-medium">
+                        Female
+                        <input type="radio" name="byGender" id="SearchedFemale" class="seearchByGender">
+                     </label>
+                  </div>
             </form>
             <table class="border rounded-tl-lg rounded-tr-lg  overflow-x-scroll ">
                <thead class="border  border-[#696969] ">
@@ -116,12 +131,8 @@
 
 
    </script>
-   <!-- <script src="../../js/data.js"></script> -->
-   <!-- <script src="./allEmployees.js"></script> -->
-   <!-- <script src="../../components/delete-modal/delete.js"></script> -->
-   <script src="../../components/modals-data/modal-content.js" ></script>
-   <script src="../../components/modals-data/modal-controller.js"></script>
-   <script src="../../js/script.js" type="module"></script>
+   <script src="../../components/modals-data/modal-controller.js" type="module" ></script>
+   <script type="module" src="../../js/script.js"></script>
 
 </body>
 

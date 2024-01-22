@@ -1,42 +1,6 @@
 "use strict";
-let allModals= document.createElement("div");
-allModals.innerHTML=`
-<!-- Delete modal ----------->
-<div id="deleteModal"
-   class="modal hidden p-4 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white z-30 font-bold flex-col justify-between gap-8">
-   <p class="block md:pl-4 md:pb-8 md:pr-16 text-[18px] md:text-[24px]">
-      Are you sure to delete ?
-   </p>
-   <div class="flex justify-center gap-4 md:gap-8">
-      <button
-         class="deleteBtn py-[8px] px-[15px] bg-red-600 text-white rounded-xl active:scale-90 hover:bg-white hover:text-red-600 border-[2px] border-red-600 duration-300 ease-linear transition-all">
-         Delete anyway
-      </button>
-      <button onclick="closeModal()"
-         class="btn cancel-btn bg-slate-400 py-[8px] px-[15px] rounded-xl duration-300 ease-linear transition-all hover:bg-slate-200 active:scale-90 border-slate-400 border-[2px]">
-         Cancel
-      </button>
-   </div>
-</div>
-<!------------ Lougout modal ------------>
-<div id="logoutModal"
-   class="modal hidden p-4 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white z-30 font-bold flex-col justify-between gap-8 ">
-   <p class="block md:pl-4 md:pb-8 md:pr-16 text-[18px] md:text-[24px] text-center">
-      Are you sure to
-      <span class="text-red-700 text-[18px] md:text-[24px]">logout</span>
-      ?
-   </p>
-   <div class="flex justify-center gap-4 md:gap-8">
-      <button onclick="logout()"
-         class="logoutBtn py-[8px] px-[15px] bg-red-600 text-white rounded-xl active:scale-90 hover:bg-white hover:text-red-600 border-[2px] border-red-600 duration-300 ease-linear transition-all">
-         Logout anyway
-      </button>
-      <button onclick="closeModal()"
-         class="btn cancel-btn bg-slate-400 py-[8px] px-[15px] rounded-xl duration-300 ease-linear transition-all hover:bg-slate-200 active:scale-90 border-slate-400 border-[2px]">
-         Cancel
-      </button>
-   </div>
-</div>
+export const addEditModal= document.createElement("div");
+addEditModal.innerHTML=`
 <!------ Add Employee modal  ----->
 <div  id="employeeModal"
    class="modal  hidden flex-col absolute top-0 left-0 w-full md:w-fit h-full md:h-fit md:top-[50%] md:left-[50%] md:translate-x-[-50%] md:translate-y-[-50%] lg:top-[50%] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[-50%] bg-white z-30 md:rounded-xl md:overflow-y-auto">
@@ -148,8 +112,45 @@ allModals.innerHTML=`
    </form>
 </div>
 `
-document.body.prepend(allModals)
-export {
-   allModals,
-
-}
+export const deleteModal= document.createElement('div');
+deleteModal.innerHTML = `
+<!-- Delete modal ----------->
+<div id="deleteModal"
+   class="modal hidden p-4 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white z-30 font-bold flex-col justify-between gap-8">
+   <p class="block md:pl-4 md:pb-8 md:pr-16 text-[18px] md:text-[24px]">
+      Are you sure to delete ?
+   </p>
+   <div class="flex justify-center gap-4 md:gap-8">
+      <button
+         class="deleteBtn py-[8px] px-[15px] bg-red-600 text-white rounded-xl active:scale-90 hover:bg-white hover:text-red-600 border-[2px] border-red-600 duration-300 ease-linear transition-all">
+         Delete anyway
+      </button>
+      <button onclick="closeModal()"
+         class="btn cancel-btn bg-slate-400 py-[8px] px-[15px] rounded-xl duration-300 ease-linear transition-all hover:bg-slate-200 active:scale-90 border-slate-400 border-[2px]">
+         Cancel
+      </button>
+   </div>
+</div>
+`
+export const logoutModal=document.createElement('div')
+logoutModal.innerHTML=` 
+<!------------ Lougout modal ------------>
+<div id="logoutModal"
+   class="modal hidden p-4 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white z-30 font-bold flex-col justify-between gap-8 ">
+   <p class="block md:pl-4 md:pb-8 md:pr-16 text-[18px] md:text-[24px] text-center">
+      Are you sure to
+      <span class="text-red-700 text-[18px] md:text-[24px]">logout</span>
+      ?
+   </p>
+   <div class="flex justify-center gap-4 md:gap-8">
+      <button onclick="logout()"
+         class="logoutBtn py-[8px] px-[15px] bg-red-600 text-white rounded-xl active:scale-90 hover:bg-white hover:text-red-600 border-[2px] border-red-600 duration-300 ease-linear transition-all">
+         Logout anyway
+      </button>
+      <button onclick="closeModal()"
+         class="btn cancel-btn bg-slate-400 py-[8px] px-[15px] rounded-xl duration-300 ease-linear transition-all hover:bg-slate-200 active:scale-90 border-slate-400 border-[2px]">
+         Cancel
+      </button>
+   </div>
+</div>
+`

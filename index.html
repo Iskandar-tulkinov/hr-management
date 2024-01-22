@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full w-full">
    <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -63,28 +63,28 @@
                   </li>
                </ul>
          </aside>
-            <section class="flex flex-col  p-4 gap-4 w-full h-full bg-gray-150">
-               <div class="flex  w-full justify-evenly h-fit gap-4">
-                  <div
-                     class="border-[2px] border-gray-300 p-12 rounded-[10px]  h-fit flex justify-center items-center gap-2 bg-white hover:shadow-xl hover:bg-violet-300 shadow-black hover:translate-y-[-1%] duration-200 transition-all ease-linear">
+            <section class="flex flex-col  p-4 gap-4 w-full h-full bg-gray-200">
+               <div class="flex flex-wrap md:flex-nowrap  w-full justify-evenly gap-4">
+                  <a href="./pages/all-employees/allEmployees.html" title="Table of Employees"
+                     class="border-[2px] border-gray-300 p-12 rounded-[10px]   flex justify-center items-center gap-2 bg-white hover:shadow-xl hover:bg-violet-300 shadow-black hover:translate-y-[-1%] duration-200 transition-all ease-linear">
                      <span class="icon-users text-red-800 text-[48px] font-bold"></span>
                      <p class="totalEmployees text-[50px] font-bold">0</p>
-                  </div>
+                  </a>
                   <div
-                     class=" border-[2px] border-gray-700 rounded-[10px] p-12 flex  h-fit   items-center justify-center gap-2  hover:shadow-xl shadow-black hover:translate-y-[-1%] duration-200 transition-all ease-linear">
+                     class=" border-[2px] border-gray-300 rounded-[10px] p-12 flex     items-center justify-center gap-2  hover:shadow-xl bg-white hover:bg-violet-300 shadow-black hover:translate-y-[-1%] duration-200 transition-all ease-linear">
                      <span class="icon-man text-[48px]  text-red-800  font-medium"></span>
                      <p class="maleEmployees text-[50px] font-bold">0</p>
                   </div>
                   <div
-                     class="border-[2px] border-gray-700 rounded-[10px] h-fit p-12  flex justify-center items-center gap-2  hover:shadow-xl shadow-black hover:translate-y-[-1%] duration-200 transition-all ease-linear">
+                     class="border-[2px] border-gray-300 rounded-[10px] h-fit p-12  flex justify-center items-center gap-2  bg-white hover:shadow-xl hover:bg-violet-300 shadow-black hover:translate-y-[-1%] duration-200 transition-all ease-linear">
                      <span class="icon-woman text-[48px] text-red-800 font-medium "></span>
                      <p class="femaleEmployees text-[50px] font-bold">0</p>
                   </div>
                </div>
 
                <div
-               class="border-[2px] border-gray-700 p-4 rounded-[10px] h-fit w-fit  flex flex-col items-start gap-2  hover:shadow-xl shadow-black hover:translate-y-[-1%] duration-200 transition-all ease-linear">
-               <h2 class="text-red-800 text-[24px] font-bold text-center h-fit ">
+               class="border-[2px] border-gray-300 p-4 rounded-[10px] grid  items-start gap-2 bg-white hover:shadow-xl hover:bg-violet-300 shadow-black hover:translate-y-[-1%] duration-200 transition-all ease-linear">
+               <h2 class="text-red-800 text-[24px] font-bold text-center ">
                   Number of employees in each department
                </h2>
                <p class="accountingEmployees text-[24px] font-bold">Accounting: 0</p>
@@ -107,8 +107,8 @@
       </div>
 
       <!-- <script src="./js/data.js"></script> -->
-      <script src="./components/modals-data/modal-controller.js"></script>
-      <script type="module" src="./components/modals-data/modal-content.js" ></script>
+      <script src="./components/modals-data/modal-controller.js" type="module"></script>
+      <!-- <script  src="./components/modals-data/modal-content.js" ></script> -->
       <script src="./js/script.js" type="module"></script>
    </body>
 </html>

@@ -1,5 +1,10 @@
 "use strict";
-// import { allModals } from "./modal-content.js";
+
+import { addEditModal, deleteModal,logoutModal } from "../components/modals-data/modal-content.js";
+document.body.prepend(addEditModal)
+document.body.prepend(deleteModal)
+document.body.prepend(logoutModal)
+
 const btns=document.querySelectorAll("[data-target]");
 const modals = document.querySelectorAll(".modal");
 const overlay = document.querySelector(".overlay");
@@ -40,7 +45,6 @@ closeModal();
 
 //////
  const ageInputs = document.querySelectorAll(".age-input");
- function ageInputFormatter() {
   ageInputs.forEach(ageInput=>{
     ageInput.addEventListener("input", (e) => {
       const ageValue = e.target.value.replace(/\D/g, "");
@@ -48,7 +52,3 @@ closeModal();
       e.target.value = ageValue.trim();
      });
    })
-
- }
-
- ageInputFormatter()
