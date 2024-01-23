@@ -46,29 +46,3 @@ function saveToLocalStorage() {
    localStorage.setItem("list", JSON.stringify(employeesData));
 }
 
-export function statistics(){
-   employeesData = JSON.parse(localStorage.getItem('list')) || [];
-
-   let numberOfMales=employeesData.filter(employee=>employee.gender.toLowerCase()=='male')
-   document.querySelector('.maleEmployees').textContent=numberOfMales.length
-
-   let numberOfFemales=employeesData.filter(employee=>employee.gender.toLowerCase()=='female')
-   document.querySelector('.femaleEmployees').textContent=numberOfFemales.length
-
-   document.querySelector(".totalEmployees").textContent=numberOfFemales.length+numberOfMales.length
-
-   let IT=employeesData.filter(employee=>employee.department=='IT')
-   let accounting=employeesData.filter(employee=>employee.department=='Accounting')
-   let marketing=employeesData.filter(employee=>employee.department=='Marketing')
-   let management=employeesData.filter(employee=>employee.department=='Management')
-
-
-   document.querySelector('.accountingEmployees').textContent=`Accounting: ${accounting.length}`
-   document.querySelector('.ITEmployees').textContent=`IT: ${IT.length}`
-   document.querySelector('.marketingEmployees').textContent=`Marketing: ${marketing.length}`
-   document.querySelector('.managementEmployees').textContent=`Management: ${management.length}`
-   //  console.log("it:",IT);
-   //  console.log("accounting",accounting);
-   //  console.log("marketing",marketing);
-   //  console.log("management",management);
-}

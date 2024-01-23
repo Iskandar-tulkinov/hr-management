@@ -1,13 +1,13 @@
 "use strict";
-export const addEditModal= document.createElement("div");
-addEditModal.innerHTML=`
+export const addEditModal = document.createElement("div");
+addEditModal.innerHTML = `
 <!------ Add Employee modal  ----->
 <div  id="employeeModal"
-   class="modal  hidden flex-col absolute top-0 left-0 w-full md:w-fit h-full md:h-fit md:top-[50%] md:left-[50%] md:translate-x-[-50%] md:translate-y-[-50%] lg:top-[50%] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[-50%] bg-white z-30 md:rounded-xl md:overflow-y-auto">
+   class="modal hidden  flex-col absolute top-0 left-0 w-full md:w-fit h-full md:h-fit md:top-[50%] md:left-[50%] md:translate-x-[-50%] md:translate-y-[-50%] lg:top-[50%] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[-50%] bg-white z-30 md:rounded-xl md:overflow-y-hidden">
    <div class="flex justify-between border-b-2 border-b-gray-400 p-6">
       <h2 class="modal__title text-[24px] font-bold">Add new Employee</h2>
-      <button onclick="closeModal()"
-         class="close-icon bg-slate-200 hover:bg-red-700 rounded-lg active:scale-90 duration-3 ease-linear transition-all focus:bg-red-700"
+      <button
+         class="closeIcon bg-slate-200 hover:bg-red-700 rounded-lg active:scale-90 duration-3 ease-linear transition-all focus:bg-red-700"
          role="button">
          <img class="" src="../../assets/img/close.svg" alt="Close icon" width="30" height="30" />
       </button>
@@ -111,8 +111,8 @@ addEditModal.innerHTML=`
       </div>
    </form>
 </div>
-`
-export const deleteModal= document.createElement('div');
+`;
+export const deleteModal = document.createElement("div");
 deleteModal.innerHTML = `
 <!-- Delete modal ----------->
 <div id="deleteModal"
@@ -126,31 +126,33 @@ deleteModal.innerHTML = `
          Delete anyway
       </button>
       <button onclick="closeModal()"
-         class="btn cancel-btn bg-slate-400 py-[8px] px-[15px] rounded-xl duration-300 ease-linear transition-all hover:bg-slate-200 active:scale-90 border-slate-400 border-[2px]">
+         class="btn cancelBtn bg-slate-400 py-[8px] px-[15px] rounded-xl duration-300 ease-linear transition-all hover:bg-slate-200 active:scale-90 border-slate-400 border-[2px]">
          Cancel
       </button>
    </div>
 </div>
-`
-export const logoutModal=document.createElement('div')
-logoutModal.innerHTML=` 
+`;
+export const logoutModal = document.createElement("div");
+logoutModal.innerHTML = `
 <!------------ Lougout modal ------------>
 <div id="logoutModal"
-   class="modal hidden p-4 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white z-30 font-bold flex-col justify-between gap-8 ">
-   <p class="block md:pl-4 md:pb-8 md:pr-16 text-[18px] md:text-[24px] text-center">
-      Are you sure to
-      <span class="text-red-700 text-[18px] md:text-[24px]">logout</span>
-      ?
-   </p>
+   class="modal hidden  p-4 flex-col  absolute h-fit w-fit  md:top-[50%] md:left-[50%] md:translate-x-[-50%] md:translate-y-[-50%]  lg:translate-x-[-50%] lg:translate-y-[-50%] bg-white z-30 rounded-lg  ">
+   <div class="w-full mb-8">
+      <p class="block md:pl-4 md:pb-8 md:pr-16 text-[18px] md:text-[24px]  text-center ">
+         Are you sure to
+         <span class="text-red-700 text-[18px] md:text-[24px]">logout</span>
+         ?
+      </p>
+   </div>
    <div class="flex justify-center gap-4 md:gap-8">
-      <button onclick="logout()"
-         class="logoutBtn py-[8px] px-[15px] bg-red-600 text-white rounded-xl active:scale-90 hover:bg-white hover:text-red-600 border-[2px] border-red-600 duration-300 ease-linear transition-all">
+      <button
+         class="logoutBtn py-[8px] px-[15px] bg-red-500 text-white rounded-xl active:scale-90 hover:bg-white hover:text-red-500 border-[2px] border-red-500 duration-300 ease-linear transition-all">
          Logout anyway
       </button>
-      <button onclick="closeModal()"
-         class="btn cancel-btn bg-slate-400 py-[8px] px-[15px] rounded-xl duration-300 ease-linear transition-all hover:bg-slate-200 active:scale-90 border-slate-400 border-[2px]">
+      <button
+         class="btn cancelBtn bg-slate-400 py-[8px] px-[15px] rounded-xl duration-300 ease-linear transition-all hover:bg-slate-200 active:scale-90 border-slate-400 border-[2px]">
          Cancel
       </button>
    </div>
 </div>
-`
+`;
